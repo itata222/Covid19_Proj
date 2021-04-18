@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <link rel="icon" type="image/png" href="https://datadashboard.health.gov.il/COVID-19/favicon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="./home.css" type="text/css">
+    <title>קורונה - לוח בקרה</title>
+</head>
+<body>
+    <div id="body-container" class="layout-regular">
+        <div class="navigation-bar-section">
+            <div class="navigation-bar-container">
+                <div class="navigation-bar-colored-line"> </div>
+                <div class="navigation-bar-data">
+                    <div class="nb-data1">
+                        <button class="nb_data1-button">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-menu-outline" fill="currentColor"><g data-name="Layer 2"><g data-name="menu">
+                                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                                        <rect x="3" y="11" width="18" height="2" rx=".95" ry=".95"></rect><rect x="3" y="16" width="18" height="2" rx=".95" ry=".95"></rect>
+                                        <rect x="3" y="6" width="18" height="2" rx=".95" ry=".95"></rect></g></g>
+                                </svg>
+                            </span>
+                        </button>
+                        <img class="nb_data1-img" src="https://datadashboard.health.gov.il/COVID-19/assets/images/logo_DAshboard-01.png" alt="Israel iconic symbol">
+                    </div>
+                    <div class="nb-data2">
+                        <button id="accessibility-button" class="nb_data2-button">
+                            <span id="accessibility-text">לתצוגה נגישה</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-section">
+            <div class="main-boxes-container">
+                <div class="main-boxes-margins">
+                    <div class="main-box main-box1-newVerified-section">
+                        <div id="main-box1-newVerified-container" class="main-box1-newVerified-container">
+                           
+                        </div>
+                    </div>
+                    <div class="main-box main-box2-activeVerified-section">
+                        <div id="main-box2-activeVerified-container" class="main-box2-activeVerified-container">
+                            
+                        </div>
+                    </div>
+                    <div class="main-box main-box3-severePatients-section">
+                        <div id="main-box3-severePatients-container" class="main-box3-severePatients-container">
+                            
+                        </div>
+                    </div>
+                    <div class="main-box main-box4-vaccinated-section">
+                        <div id="main-box4-vaccinated-container" class="main-box4-vaccinated-container">
+                            
+                        </div>
+                    </div>
+                    <div class="main-box main-box5-totalDeaths-section">
+                        <div id="main-box5-totalDeaths-container" class="main-box5-totalDeaths-container">
+                            
+                        </div>
+                    </div>
+                    <div class="main-box main-box6-PercentageOfPositiveTests-section">
+                        <div id="main-box6-PercentageOfPositiveTests-container" class="main-box6-PercentageOfPositiveTests-container">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-indices-of-vaccination">
+                <div class="indices-header-container">
+                    <div class="indices-header">
+                        מדדי התחסנות
+                    </div>
+                </div>
+                <div class="indices-box indices-firstBox">
+                    <div class="indices-firstBox-header-container">
+                        <div class="indices-firstBox-header-title-container">
+                            <div class="indices-firstBox-header-title">
+                                מספר מתחסנים - יומי
+                            </div>
+                            <div class="indices-firstBox-header-timeframe">
+                                <form action="#">
+                                    <select name="indices-timeframe" id="indices-timeframe-dropdown" class="indices-timeframe-dropdown">
+                                        <option value="till-now">עד עכשיו</option>
+                                        <option value="last-week">שבוע אחרון</option>
+                                        <option value="last-2weeks">שבועיים אחרונים</option>
+                                        <option value="last-month" selected>חודש אחרון</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <div class="indices-firstBox-header-symbols">
+                              <span class="indices-firstBox-symbol-share">
+                                <button class="indices-firstBox-symbol-share-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
+                                        <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
+                                        <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
+                                    </svg>
+                                </button>
+                              </span>
+                              <span class="indices-firstBox-symbol-downloadExcel">
+                                <button class="indices-firstBox-symbol-downloadExcel-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
+                                        <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
+                                        <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
+                                    </svg>
+                                </button>
+                            </span>
+                            </div>
+                        </div>
+                        <div class="indices-firstBox-header-legend-container">
+                            <div class="legend-vaccinated-first">
+                                <span class="legend-circle-first">
+
+                                </span>
+                                <span class="legend-text">
+                                    מתחסנים מנה ראשונה
+                                </span>
+                            </div>
+                            <div class="legend-vaccinated-second">
+                                <span class="legend-circle-second">
+
+                                </span>
+                                <span class="legend-text">
+                                    מתחסנים מנה שנייה
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="indices-firstBox-graph-container">
+                        <div class="ct-chart1 ct-perfect-fourth"></div>
+                    </div>
+                </div>
+                <div class="indices-box indices-secondBox">
+                    <div class="indices-secondBox-header-container">
+                        <div class="indices-secondBox-header-title-container">
+                            <div class="indices-secondBox-header-title">
+                                מספר מתחסנים - מצטבר
+                            </div>
+                            <div class="indices-secondBox-header-timeframe">
+                                <form action="#">
+                                    <select name="indices-timeframe" id="indices-timeframe-dropdown2" class="indices-timeframe-dropdown">
+                                        <option value="till-now">עד עכשיו</option>
+                                        <option value="last-week">שבוע אחרון</option>
+                                        <option value="last-2weeks">שבועיים אחרונים</option>
+                                        <option value="last-month" selected>חודש אחרון</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <div class="indices-secondBox-header-symbols">
+                              <span class="indices-secondBox-symbol-share">
+                                <button class="indices-secondBox-symbol-share-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
+                                        <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
+                                        <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
+                                    </svg>
+                                </button>
+                              </span>
+                              <span class="indices-secondBox-symbol-downloadExcel">
+                                <button class="indices-secondBox-symbol-downloadExcel-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
+                                        <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
+                                        <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
+                                    </svg>
+                                </button>
+                            </span>
+                            </div>
+                        </div>
+                        <div class="indices-secondBox-header-legend-container">
+                            <div class="legend-vaccinated-first">
+                                <span class="legend-circle-first">
+
+                                </span>
+                                <span class="legend-text">
+                                    מתחסנים מנה ראשונה
+                                </span>
+                            </div>
+                            <div class="legend-vaccinated-second">
+                                <span class="legend-circle-second">
+
+                                </span>
+                                <span class="legend-text">
+                                    מתחסנים מנה שנייה
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="indices-secondBox-graph-container">
+                        <div class="ct-chart2 ct-perfect-fourth"></div>
+                    </div>
+                </div>
+                <div class="indices-box indices-thirdBox">
+                    <div class="indices-thirdBox-header-container">
+                        <div class="indices-thirdBox-header-title-container">
+                            <div class="indices-thirdBox-header-title">
+                                אחוז מתחסנים מכלל האוכלוסיה
+                            </div>
+                            <div class="indices-thirdBox-header-timeframe">
+                                <form action="#">
+                                    <select name="indices-timeframe" id="indices-timeframe-dropdown3" class="indices-timeframe-dropdown">
+                                        <option value="till-now">עד עכשיו</option>
+                                        <option value="last-week">שבוע אחרון</option>
+                                        <option value="last-2weeks">שבועיים אחרונים</option>
+                                        <option value="last-month" selected>חודש אחרון</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <div class="indices-thirdBox-header-symbols">
+                              <span class="indices-thirdBox-symbol-share">
+                                <button class="indices-thirdBox-symbol-share-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
+                                        <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
+                                        <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
+                                    </svg>
+                                </button>
+                              </span>
+                              <span class="indices-thirdBox-symbol-downloadExcel">
+                                <button class="indices-thirdBox-symbol-downloadExcel-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
+                                        <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
+                                        <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
+                                    </svg>
+                                </button>
+                            </span>
+                            </div>
+                        </div>
+                        <div class="indices-thirdBox-header-legend-container">
+                            <div class="legend-vaccinated-first">
+                                <span class="legend-circle-first">
+
+                                </span>
+                                <span class="legend-text">
+                                    מתחסנים מנה ראשונה
+                                </span>
+                            </div>
+                            <div class="legend-vaccinated-second">
+                                <span class="legend-circle-second">
+
+                                </span>
+                                <span class="legend-text">
+                                    מתחסנים מנה שנייה
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="indices-thirdBox-graph-container">
+                        <div class="ct-chart3 ct-perfect-fourth"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-vaccinated-cities">
+                <div class="vaccinated-cities-container"> </div>
+            </div>
+            <div class="main-vaccinated-ages">
+                <div class="vaccinated-ages-container"> </div>
+            </div>
+            <div class="main-new-patients">
+                <div class="vaccinated-cities-container"> </div>
+            </div>
+            <div class="main-vaccinated-ages">
+                <div class="vaccinated-ages-container"> </div>
+            </div>
+            <div class="main-indices-of-vaccination">
+                <div class="indices-box indices-firstBox">
+                    <div class="indices-firstBox-header-container"></div>
+                </div>
+                <div class="indices-box indices-secondBox">
+                    <div class="indices-secondBox-header-container"></div>
+                </div>
+            </div>
+            <div class="main-indices-of-vaccination">
+                <div class="indices-box indices-firstBox">
+                    <div class="indices-firstBox-header-container"></div>
+                </div>
+                <div class="indices-box indices-secondBox">
+                    <div class="indices-secondBox-header-container"></div>
+                </div>
+            </div>
+            <div class="main-vaccinated-ages">
+                <div class="vaccinated-ages-container"> </div>
+            </div>
+            <div class="main-vaccinated-ages">
+                <div class="vaccinated-ages-container"> </div>
+            </div>
+            <div class="main-vaccinated-ages">
+                <div class="vaccinated-ages-container"> </div>
+            </div>
+
+            <div class="main-ramzor-plan">
+                <div class="ramzor-plan-container">Ramzor Plan </div>
+            </div>
+
+            <div class="main-vaccinated-ages">
+                <div class="vaccinated-ages-container"> </div>
+            </div>
+            <div class="main-vaccinated-ages">
+                <div class="vaccinated-ages-container"> </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="mainBox2Template" type="text/html">
+        <div class="Verified-All">
+            <div class="Verified-textAndsymbol">
+            <h6 class="Verified-text">
+                חולים פעילים
+            </h6>
+            <span class="Verified-symbol">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-info" fill="currentColor"><g data-name="Layer 2"><g data-name="info">
+                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                    <path class="i" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z">
+                    </path></g></g>
+                </svg>
+            </span>
+            </div>
+            <h5 id="Verified-number" class="Verified-number">{{verifiedSum}}</h5>
+            <div class="Verified-MidNight">
+                <span id="verifiedMidnightContainer" class="box-number">
+                    {{verifiedMidnight}}
+                </span>
+                <span class="box-text">מחצות</span>
+            </div>
+        </div>
+        <div class="Verified-All-places">
+            <div class="Verified-places">
+                <span>בית / קהילה</span>
+                <span>מלון</span>
+                <span>בי"ח</span>
+            </div>
+            <div id="verifiedPlaces" class="Verified-places-numbers">
+                <span>{{home}}</span>
+                <span>{{hotel}}</span>
+                <span>{{hospital}}</span>
+            </div>
+        </div>
+    </script>
+
+    <script id="mainBox1NewVerifiedTemplate" type="text/html">
+        <div class="newVerified-Yesterday">
+            <div class="newVerified-Yesterday-textAndsymbol">
+               <h6 class="newVerified-Yesterday-text">
+                מאומתים חדשים אתמול
+               </h6>
+               <span class="newVerified-Yesterday-symbol">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-info" fill="currentColor"><g data-name="Layer 2"><g data-name="info">
+                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                    <path class="i" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z">
+                    </path></g></g>
+                </svg>
+               </span>
+            </div>
+            <h5 class="newVerified-Yesterday-number">{{newVerifiedYesterday}}</h5>
+        </div>
+        <div class="newVerified-MidNight">
+            <span class="box-number">{{newVerifiedMidNight}}</span>
+            <span class="box-text">מחצות</span>
+        </div>
+        <div class="newVerified-All">
+            <span class="box-number">{{newVerifiedAll}}</span>
+            <span class="box-text">סה"כ</span>
+        </div>
+    </script>
+
+    <script id="mainBox3Template" type="text/html">
+        <div class="severePatients-All">
+            <div class="Verified-textAndsymbol">
+            <h6 class="Verified-text">
+                חולים קשה
+            </h6>
+            <span class="Verified-symbol">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-info" fill="currentColor"><g data-name="Layer 2"><g data-name="info">
+                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                    <path class="i" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z">
+                    </path></g></g>
+                </svg>
+            </span>
+            </div>
+            <h5 class="Verified-number">{{severePatientsAll}}</h5>
+            <div class="Verified-MidNight">
+                <span class="box-number">{{severePatientsMidNight}}</span>
+                <span class="box-text">מחצות</span>
+            </div>
+        </div>
+        <div class="severePatients-All-conditions">
+            <div class="critical-condition">
+                <div class="critical-circle"></div>
+                <div class="critical-data">
+                    <span class="box-text">מתוכם קריטי</span>
+                    <span class="box-number">{{criticalPatients}}</span>
+                </div>
+            </div>
+            <div class="ventilated-condition">
+                <div class="ventilated-circle"></div>
+                <div class="ventilated-data">
+                    <span class="box-text">מונשמים</span>
+                    <span class="box-number">{{ventilatedPatients}}</span>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="mainBox4Template" type="text/html">
+        <div class="vaccinated-First-All">
+            <div class="vaccinated-textAndsymbol">
+            <h6 class="vaccinated-text">
+                מתחסנים מנה ראשונה
+            </h6>
+            </div>
+            <h5 class="vaccinated-number">{{vaccinatedFirst}}</h5>
+            <div class="vaccinated-MidNight">
+                <span class="box-number">{{vaccinatedFirstMidnight}}</span>
+                <span class="box-text">מחצות</span>
+            </div>
+        </div>
+        <div class="vaccinated-Second-All">
+            <div class="Verified-textAndsymbol">
+                <h6 class="Verified-text">
+                    מתחסנים מה שנייה
+                </h6>
+                </div>
+                <h5 class="vaccinated-number">{{vaccinatedSecond}}</h5>
+                <div class="vaccinated-MidNight">
+                    <span class="box-number">{{vaccinatedSecondMidnight}}</span>
+                    <span class="box-text">מחצות</span>
+                </div>
+        </div>
+    </script>
+
+    <script id="mainBox5Template" type="text/html">
+        <div class="totalDeaths-All">
+            <div class="totalDeaths-textAndsymbol">
+            <h6 class="totalDeaths-text">
+                נפטרים מצטבר
+            </h6>
+            <span class="totalDeaths-symbol">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-info" fill="currentColor"><g data-name="Layer 2"><g data-name="info">
+                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                    <path class="i" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z">
+                    </path></g></g>
+                </svg>
+            </span>
+            </div>
+            <h5 class="totalDeaths-number">{{totalDeaths}}</h5>
+        </div>
+        <div class="totalDeaths-graph">
+            <div class="totalDeaths-graph-container">
+                <span class="totalDeaths-graph-symbol">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-bar-chart-2" fill="currentColor"><g data-name="Layer 2"><g data-name="bar-chart-2">
+                        <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect>
+                        <path d="M12 8a1 1 0 0 0-1 1v11a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1z"></path>
+                        <path d="M19 4a1 1 0 0 0-1 1v15a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1z"></path>
+                        <path d="M5 12a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1z"></path></g></g>
+                    </svg>
+                </span>
+                <span>מגמת שינוי יומית</span>
+            </div>
+        </div>
+    </script>
+
+    <script id="mainBox6Template" type="text/html">
+        <div class="PercentageOfPositiveTests-All">
+            <div class="PercentageOfPositiveTests-textAndsymbol">
+            <h6 class="PercentageOfPositiveTests-text">
+                אחוז בדיקות חיוביות אתמול
+            </h6>
+            <span class="PercentageOfPositiveTests-symbol">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-info" fill="currentColor"><g data-name="Layer 2"><g data-name="info">
+                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                    <path class="i" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z">
+                    </path></g></g>
+                </svg>
+            </span>
+            </div>
+            <h5 class="PercentageOfPositiveTests-number">{{PercentageOfPositiveTestsYesterday}}</h5>
+            <div class="PercentageOfPositiveTests-MidNight">
+                <span class="box-number">{{sumTestsYesterday}}</span>
+                <span class="box-text">בדיקות אתמול</span>
+            </div>
+        </div>
+        <div class="PercentageOfPositiveTests-graph">
+            <div class="PercentageOfPositiveTests-graph-container">
+                <span class="PercentageOfPositiveTests-graph-symbol">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-bar-chart-2" fill="currentColor"><g data-name="Layer 2"><g data-name="bar-chart-2">
+                        <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect>
+                        <path d="M12 8a1 1 0 0 0-1 1v11a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1z"></path>
+                        <path d="M19 4a1 1 0 0 0-1 1v15a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1z"></path>
+                        <path d="M5 12a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1z"></path></g></g>
+                    </svg>
+                </span>
+                <span>בדיקות יומיות</span>
+            </div>
+        </div>
+    </script>
+
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="./render.js"></script>
+    <script src="./home.js"></script>
+</body>
+</html>

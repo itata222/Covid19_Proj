@@ -1,0 +1,35 @@
+{
+  "name": "covid19-proj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": ".\\node_modules\\.bin\\env-cmd -f .\\config\\dev.env nodemon .\\src\\index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itata222/Covid19-Site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itata222/Covid19-Site/issues"
+  },
+  "homepage": "https://github.com/itata222/Covid19-Site#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chartist": "^0.11.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3",
+    "mustache": "^4.2.0",
+    "node-schedule": "^2.0.0",
+    "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.7"
+  }
+}

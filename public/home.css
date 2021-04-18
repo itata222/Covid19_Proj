@@ -1,0 +1,538 @@
+@font-face {
+  font-family: Open Sans Hebrew;
+  src: url("./fonts/OpenSansHebrew-Regular.ttf");
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 15px !important;
+  background-color: #969696 !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+* {
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.layout-regular {
+  background-color: #edf1f7;
+  color: #222b45;
+  font-family: Open Sans Hebrew, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  min-height: 100vh;
+}
+
+.layout-accessibility {
+  background-color: #49667a;
+  color: #fff;
+  font-family: Open Sans Hebrew, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  min-height: 100vh;
+}
+
+.navigation-bar-section {
+  display: block;
+  width: 100%;
+  height: 132px;
+  margin: 0 auto;
+  line-height: 1.25rem;
+  font-size: 0.9375rem;
+  font-family: Open Sans Hebrew, sans-serif;
+  background-color: #fff;
+  color: #222b45;
+  font-weight: 400;
+}
+
+.navigation-bar-container {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0.5rem 1rem 0 rgba(44, 51, 73, 0.1);
+}
+
+.navigation-bar-colored-line {
+  width: 100%;
+  height: 2px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, #4bb887, #16b6d0, #d6e58a);
+}
+
+.navigation-bar-data {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.nb-data1 {
+  right: 4px !important;
+  top: 5px;
+  height: 57px !important;
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+.nb_data1-button {
+  outline: unset;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1500;
+  padding: 6px;
+  border: none;
+  background: unset;
+}
+.nb_data1-button span {
+  font-size: 30px;
+  color: #374f60;
+  display: flex;
+}
+
+svg {
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.nb_data1-img {
+  width: 202px;
+  height: 40px;
+}
+
+.nb-data2 {
+  display: flex;
+  position: absolute;
+  justify-content: space-around;
+  width: 20%;
+  left: 0;
+  height: 100%;
+}
+
+.nb_data2-button {
+  font-family: Open Sans Hebrew, sans-serif;
+  color: #fff;
+  background-color: #39475d;
+  border-color: #39475d;
+  border-radius: 50px;
+  padding: 5px 15px;
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-align: center;
+  box-shadow: none !important;
+  white-space: nowrap;
+  top: 17px !important;
+  left: 7px !important;
+  position: absolute;
+  border: 0.0625rem solid transparent;
+  outline: none;
+}
+
+.main-section {
+  padding: 0;
+  margin: auto;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  min-height: 100vh;
+}
+
+.main-boxes-container {
+  padding: 0.6rem 0.6rem 0.5rem;
+  width: 100%;
+}
+@media (min-width: 415px) {
+  .main-boxes-container {
+    padding: 1rem 1rem 0.5rem;
+  }
+}
+
+.main-boxes-margins {
+  margin: 0 -10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: right;
+}
+@media (min-width: 516px) {
+  .main-boxes-margins {
+    margin: 0 -15px;
+  }
+}
+
+.main-box {
+  padding: 5px;
+  width: 48%;
+  margin: 0 auto 1.3rem;
+  background-color: #fff;
+  border: 0.0625rem solid transparent;
+  border-radius: 10px;
+  box-shadow: none;
+  color: #222b45;
+  font-family: Open Sans Hebrew, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  height: 11.5rem;
+}
+
+.accessibility-Svg-path-I {
+  fill: #fff;
+}
+
+.accessiblity-graph {
+  background: #2c3a46 !important;
+}
+
+.accessibility-main-box {
+  box-shadow: rgba(26, 31, 51, 0.18) 0 8px 4px 0;
+  color: #fff;
+  background-color: #384f5f;
+}
+
+.main-box1-newVerified-container, .main-box2-activeVerified-container,
+.main-box3-severePatients-container, .main-box4-vaccinated-container,
+.main-box5-totalDeaths-container, .main-box6-PercentageOfPositiveTests-container {
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 8rem;
+}
+
+.main-box2-activeVerified-container, .main-box3-severePatients-container,
+.main-box5-totalDeaths-container, .main-box6-PercentageOfPositiveTests-container {
+  height: 11rem;
+}
+
+.newVerified-Yesterday, .Verified-All, .severePatients-All, .totalDeaths-All,
+.PercentageOfPositiveTests-All {
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  width: 110%;
+}
+
+.newVerified-Yesterday-textAndsymbol, .Verified-textAndsymbol,
+.vaccinated-textAndsymbol, .totalDeaths-textAndsymbol, .PercentageOfPositiveTests-textAndsymbol {
+  display: flex;
+  justify-content: space-between;
+}
+
+.newVerified-Yesterday-text, .Verified-text, .vaccinated-text,
+.totalDeaths-text, .PercentageOfPositiveTests-text {
+  font-size: 0.9rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  width: fit-content;
+}
+
+.newVerified-Yesterday-symbol, .Verified-symbol, .totalDeaths-symbol,
+.PercentageOfPositiveTests-symbol {
+  height: 24px;
+  width: 40px;
+  padding-right: 5px;
+  color: #bcbcbc;
+  display: inline-block;
+}
+
+.newVerified-Yesterday-number, .Verified-number,
+.totalDeaths-number {
+  line-height: 1.1;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.vaccinated-number, .PercentageOfPositiveTests-number {
+  font-size: 0.95rem;
+  line-height: 0.8;
+  margin: 0;
+  margin-bottom: 0.2rem;
+}
+
+.Verified-number {
+  margin-bottom: 0.2rem;
+}
+
+.newVerified-MidNight, .newVerified-All, .Verified-MidNight,
+.vaccinated-MidNight, .PercentageOfPositiveTests-MidNight {
+  font-size: 0.6rem;
+  font-weight: 600;
+  direction: rtl;
+  margin-bottom: 0.3rem;
+}
+
+.Verified-All-places, .severePatients-All-conditions {
+  font-size: 0.7rem;
+  width: 100%;
+  display: grid;
+  grid-auto-rows: 1rem;
+  grid-template-rows: 1fr 1fr;
+}
+
+.Verified-places {
+  display: grid;
+  grid-auto-columns: 1.5rem;
+  grid-template-columns: 3fr 1fr 1fr;
+}
+
+.Verified-places-numbers {
+  font-weight: bolder;
+  display: grid;
+  grid-auto-columns: 1.5rem;
+  grid-template-columns: 3fr 1fr 1fr;
+}
+
+.box-number {
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.box-text {
+  font-weight: lighter;
+}
+
+.critical-condition, .ventilated-condition {
+  height: fit-content;
+  vertical-align: middle;
+}
+
+.critical-data, .ventilated-data {
+  vertical-align: super;
+  display: inline-block;
+}
+
+.critical-circle {
+  background-color: #fb5377;
+  border-radius: 50%;
+  padding: 3.5px;
+  margin: 5px 0 5px 5px;
+  display: inline-block;
+}
+
+.ventilated-circle {
+  background-color: #e6b957;
+  border-radius: 50%;
+  padding: 3.5px;
+  margin: 5px 0 5px 5px;
+  display: inline-block;
+}
+
+.vaccinated-First-All {
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid #edf1f7;
+  margin-bottom: 0.3rem;
+}
+
+.totalDeaths-graph-symbol, .PercentageOfPositiveTests-graph-symbol {
+  border-radius: 50%;
+  border: 1px solid rgba(151, 151, 151, 0.22);
+  padding: 4px;
+  margin-left: 5px !important;
+  background: #fff;
+  height: 25px;
+  width: 25px;
+  z-index: 1;
+  display: inline-block;
+}
+
+.main-indices-of-vaccination {
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin-bottom: 2rem;
+}
+
+.indices-header-container {
+  width: 100%;
+  padding: 1.6rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.indices-header {
+  color: #222b45;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.indices-box {
+  height: 21.75rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.0625rem solid #edf1f7;
+}
+
+.indices-firstBox-header-container, .indices-secondBox-header-container, .indices-thirdBox-header-container {
+  width: 100%;
+  padding: 1rem 1.5rem;
+}
+
+.indices-firstBox-symbol-share-button, .indices-secondBox-symbol-share-button, .indices-thirdBox-symbol-share-button {
+  color: #222b45;
+  margin: 0 6px 0 0;
+  height: 29px;
+  width: 29px;
+  border-radius: 50%;
+  background: #fff;
+  transition: filter 0.5s;
+  display: inline-flex;
+  border: 1px solid #c9c9c9;
+  padding: 6px;
+}
+
+.indices-firstBox-symbol-downloadExcel-button, .indices-secondBox-symbol-downloadExcel-button, .indices-thirdBox-symbol-downloadExcel-button {
+  color: #222b45;
+  fill: #222b45;
+  margin: 0 6px 0 0;
+  height: 29px;
+  width: 29px;
+  border-radius: 50%;
+  background: #fff;
+  transition: filter 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c9c9c9;
+  padding: 6px;
+}
+
+.indices-firstBox-header-title-container, .indices-secondBox-header-title-container, .indices-thirdBox-header-title-container {
+  display: flex;
+}
+
+.indices-firstBox-header-symbols, .indices-secondBox-header-symbols, .indices-thirdBox-header-symbols {
+  display: flex;
+}
+
+.indices-firstBox-header-legend-container, .indices-secondBox-header-legend-container, .indices-thirdBox-header-legend-container {
+  font-size: 0.9rem;
+  font-weight: 400;
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row;
+  margin-top: 5px;
+  width: min-content;
+}
+
+.legend-vaccinated-first {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 15px;
+  white-space: nowrap;
+}
+@media (max-width: 420px) {
+  .legend-vaccinated-first {
+    font-size: 2.8vw;
+  }
+}
+@media (max-width: 460px) {
+  .legend-vaccinated-first {
+    font-size: 12px;
+  }
+}
+@media (max-width: 800px) {
+  .legend-vaccinated-first {
+    font-size: 13px;
+  }
+}
+
+.legend-vaccinated-second {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 15px;
+  white-space: nowrap;
+}
+@media (max-width: 420px) {
+  .legend-vaccinated-second {
+    font-size: 2.8vw;
+  }
+}
+@media (max-width: 460px) {
+  .legend-vaccinated-second {
+    font-size: 12px;
+  }
+}
+@media (max-width: 800px) {
+  .legend-vaccinated-second {
+    font-size: 13px;
+  }
+}
+
+.legend-circle-first {
+  background-color: #1c7d7e;
+  margin: 0 2px;
+  width: 8px;
+  height: 8px;
+  padding: 5px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.legend-circle-second {
+  background-color: #b6ca51;
+  margin: 0 2px;
+  width: 8px;
+  height: 8px;
+  padding: 5px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.indices-firstBox-graph-container, .indices-secondBox-graph-container, .indices-thirdBox-graph-container {
+  position: relative;
+  width: 347px;
+  height: 247px;
+  padding: 0px;
+  margin: 0px;
+  border-width: 0px;
+}
+
+.main-vaccinated-cities, .main-vaccinated-ages, .main-new-patients, .main-ramzor-plan {
+  padding: 5px;
+  width: 100%;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.main-new-patients {
+  margin-bottom: 0.5rem;
+}
+
+.vaccinated-cities-container, .vaccinated-ages-container, .ramzor-plan-container {
+  height: 21.75rem;
+}
+
+/*# sourceMappingURL=home.css.map */
