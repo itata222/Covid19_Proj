@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <link rel="icon" type="image/png" href="https://datadashboard.health.gov.il/COVID-19/favicon.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="./home.css" type="text/css">
@@ -83,33 +84,35 @@
                             <div class="indices-firstBox-header-title">
                                 מספר מתחסנים - יומי
                             </div>
-                            <div class="indices-firstBox-header-timeframe">
-                                <form action="#">
-                                    <select name="indices-timeframe" id="indices-timeframe-dropdown" class="indices-timeframe-dropdown">
-                                        <option value="till-now">עד עכשיו</option>
-                                        <option value="last-week">שבוע אחרון</option>
-                                        <option value="last-2weeks">שבועיים אחרונים</option>
-                                        <option value="last-month" selected>חודש אחרון</option>
-                                    </select>
-                                </form>
-                            </div>
-                            <div class="indices-firstBox-header-symbols">
-                              <span class="indices-firstBox-symbol-share">
-                                <button class="indices-firstBox-symbol-share-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
-                                        <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
-                                        <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
-                                    </svg>
-                                </button>
-                              </span>
-                              <span class="indices-firstBox-symbol-downloadExcel">
-                                <button class="indices-firstBox-symbol-downloadExcel-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
-                                        <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
-                                        <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
-                                    </svg>
-                                </button>
-                            </span>
+                            <div class="indices-firstBox-leftHeader">
+                                <div class="indices-firstBox-header-timeframe">
+                                    <form action="#">
+                                        <select name="indices-timeframe" id="indices-timeframe-dropdown" class="indices-timeframe-dropdown">
+                                            <option value="till-now">עד עכשיו</option>
+                                            <option value="last-week">שבוע אחרון</option>
+                                            <option value="last-2weeks">שבועיים אחרונים</option>
+                                            <option value="last-month" selected>חודש אחרון</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="indices-firstBox-header-symbols">
+                                  <span class="indices-firstBox-symbol-share">
+                                    <button class="indices-firstBox-symbol-share-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
+                                            <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
+                                        </svg>
+                                    </button>
+                                  </span>
+                                  <span class="indices-firstBox-symbol-downloadExcel">
+                                    <button class="indices-firstBox-symbol-downloadExcel-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
+                                            <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
+                                        </svg>
+                                    </button>
+                                </span>
+                                </div>
                             </div>
                         </div>
                         <div class="indices-firstBox-header-legend-container">
@@ -141,33 +144,35 @@
                             <div class="indices-secondBox-header-title">
                                 מספר מתחסנים - מצטבר
                             </div>
-                            <div class="indices-secondBox-header-timeframe">
-                                <form action="#">
-                                    <select name="indices-timeframe" id="indices-timeframe-dropdown2" class="indices-timeframe-dropdown">
-                                        <option value="till-now">עד עכשיו</option>
-                                        <option value="last-week">שבוע אחרון</option>
-                                        <option value="last-2weeks">שבועיים אחרונים</option>
-                                        <option value="last-month" selected>חודש אחרון</option>
-                                    </select>
-                                </form>
-                            </div>
-                            <div class="indices-secondBox-header-symbols">
-                              <span class="indices-secondBox-symbol-share">
-                                <button class="indices-secondBox-symbol-share-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
-                                        <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
-                                        <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
-                                    </svg>
-                                </button>
-                              </span>
-                              <span class="indices-secondBox-symbol-downloadExcel">
-                                <button class="indices-secondBox-symbol-downloadExcel-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
-                                        <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
-                                        <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
-                                    </svg>
-                                </button>
-                            </span>
+                            <div class="indices-firstBox-leftHeader">
+                                <div class="indices-secondBox-header-timeframe">
+                                    <form action="#">
+                                        <select name="indices-timeframe" id="indices-timeframe-dropdown2" class="indices-timeframe-dropdown">
+                                            <option value="till-now">עד עכשיו</option>
+                                            <option value="last-week">שבוע אחרון</option>
+                                            <option value="last-2weeks">שבועיים אחרונים</option>
+                                            <option value="last-month" selected>חודש אחרון</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="indices-secondBox-header-symbols">
+                                <span class="indices-secondBox-symbol-share">
+                                    <button class="indices-secondBox-symbol-share-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
+                                            <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
+                                        </svg>
+                                    </button>
+                                </span>
+                                <span class="indices-secondBox-symbol-downloadExcel">
+                                    <button class="indices-secondBox-symbol-downloadExcel-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
+                                            <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
+                                        </svg>
+                                    </button>
+                                </span>
+                                </div>
                             </div>
                         </div>
                         <div class="indices-secondBox-header-legend-container">
@@ -199,33 +204,35 @@
                             <div class="indices-thirdBox-header-title">
                                 אחוז מתחסנים מכלל האוכלוסיה
                             </div>
-                            <div class="indices-thirdBox-header-timeframe">
-                                <form action="#">
-                                    <select name="indices-timeframe" id="indices-timeframe-dropdown3" class="indices-timeframe-dropdown">
-                                        <option value="till-now">עד עכשיו</option>
-                                        <option value="last-week">שבוע אחרון</option>
-                                        <option value="last-2weeks">שבועיים אחרונים</option>
-                                        <option value="last-month" selected>חודש אחרון</option>
-                                    </select>
-                                </form>
-                            </div>
-                            <div class="indices-thirdBox-header-symbols">
-                              <span class="indices-thirdBox-symbol-share">
-                                <button class="indices-thirdBox-symbol-share-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
-                                        <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
-                                        <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
-                                    </svg>
-                                </button>
-                              </span>
-                              <span class="indices-thirdBox-symbol-downloadExcel">
-                                <button class="indices-thirdBox-symbol-downloadExcel-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
-                                        <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
-                                        <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
-                                    </svg>
-                                </button>
-                            </span>
+                            <div class="indices-firstBox-leftHeader">
+                                <div class="indices-thirdBox-header-timeframe">
+                                    <form action="#">
+                                        <select name="indices-timeframe" id="indices-timeframe-dropdown3" class="indices-timeframe-dropdown">
+                                            <option value="till-now">עד עכשיו</option>
+                                            <option value="last-week">שבוע אחרון</option>
+                                            <option value="last-2weeks">שבועיים אחרונים</option>
+                                            <option value="last-month" selected>חודש אחרון</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="indices-thirdBox-header-symbols">
+                                <span class="indices-thirdBox-symbol-share">
+                                    <button class="indices-thirdBox-symbol-share-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
+                                            <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
+                                        </svg>
+                                    </button>
+                                </span>
+                                <span class="indices-thirdBox-symbol-downloadExcel">
+                                    <button class="indices-thirdBox-symbol-downloadExcel-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
+                                            <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
+                                        </svg>
+                                    </button>
+                                </span>
+                                </div>
                             </div>
                         </div>
                         <div class="indices-thirdBox-header-legend-container">
@@ -291,7 +298,113 @@
             </div>
 
             <div class="main-ramzor-plan">
-                <div class="ramzor-plan-container">Ramzor Plan </div>
+                <div class="ramzor-plan-container">
+                    <div class="ramzor-rightSide-container">
+                        <div class="ramzor-header-container">
+                            <span class="ramzor-header">תוכנית הרמזור</span>
+                            <span class="ramzor-i-symbol">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-info" fill="currentColor"><g data-name="Layer 2"><g data-name="info">
+                                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                                    <path class="i" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z">
+                                    </path></g></g>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="ramzor-explenations-container">
+                            <span class="ramzor-explenations"> * מרכיבי ציון הרמזור (לפי נתוני השבוע האחרון) </span>
+                        </div>
+                        <div class="ramzor-date-container">
+                            <span class="remark-icon">i</span>
+                            <span class="ramzor-date">הנתונים נכונים לתאריך 17/04/2021</span>
+                        </div>
+                        <div class="ramzor-search-area-container">
+                            <div class="ramzor-searchCity-container">
+                                <div class="ramzor-search-inside">
+                                    <span class="ramzor-search-symbol">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                   <input class="ramzor-search-text" type="text" placeholder="חיפוש ישוב">
+                                </div>
+                            </div>
+                            <div class="ramzor-symbols-container">
+                                <span class="indices-secondBox-symbol-share">
+                                    <button class="indices-secondBox-symbol-share-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-share-outline" fill="currentColor">
+                                            <g data-name="Layer 2"><g data-name="share"><rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3zm0-10a1 1 0 1 1-1 1 1 1 0 0 1 1-1zM5 13a1 1 0 1 1 1-1 1 1 0 0 1-1 1zm13 6a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g>
+                                        </svg>
+                                    </button>
+                                  </span>
+                                  <span class="indices-secondBox-symbol-downloadExcel">
+                                    <button class="indices-secondBox-symbol-downloadExcel-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-arrow-downward-outline" fill="currentColor">
+                                            <g data-name="Layer 2"><g data-name="arrow-downward"><rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M18.77 13.36a1 1 0 0 0-1.41-.13L13 16.86V5a1 1 0 0 0-2 0v11.86l-4.36-3.63a1 1 0 1 0-1.28 1.54l6 5 .15.09.13.07a1 1 0 0 0 .72 0l.13-.07.15-.09 6-5a1 1 0 0 0 .13-1.41z"></path></g></g>
+                                        </svg>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ramzor-leftSide-container">
+                        <div class="color-explan-container">
+                            <div id="ramzor-color-explan-cube-red"></div>
+                            <div class="ramzor-color-explan-text-container">
+                                <div class="ramzor-color-explan-text-line1">
+                                    אדום - פעילות מינימלית
+                                </div>
+                                <div class="ramzor-color-explan-text-line2">
+                                    ציון 7.5 ומעלה
+                                </div>
+                            </div>
+                        </div>
+                        <div class="color-explan-container">
+                            <div id="ramzor-color-explan-cube-orange"></div>
+                            <div class="ramzor-color-explan-text-container">
+                                <div class="ramzor-color-explan-text-line1">
+                                    כתום - פעילות מצומצמת
+                                </div>
+                                <div class="ramzor-color-explan-text-line2">
+                                    ציון בין 6 ל - 7.5
+                                </div>
+                            </div>
+                        </div>
+                        <div class="color-explan-container">
+                            <div id="ramzor-color-explan-cube-yellow"></div>
+                            <div class="ramzor-color-explan-text-container">
+                                <div class="ramzor-color-explan-text-line1">
+                                    צהוב - פעילות מוגבלת
+                                </div>
+                                <div class="ramzor-color-explan-text-line2">
+                                    ציון בין 4.5 ל - 6
+                                </div>
+                            </div>
+                        </div>
+                        <div class="color-explan-container">
+                            <div id="ramzor-color-explan-cube-green"></div>
+                            <div class="ramzor-color-explan-text-container">
+                                <div class="ramzor-color-explan-text-line1">
+                                    ירוק - פעילות מורחבת
+                                </div>
+                                <div class="ramzor-color-explan-text-line2">
+                                    ציון עד 4.5
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ramzor-table-container">
+                        <div class="ramzor-city">ישוב</div>
+                        <div class="ramzor-governementColor">צבע החלטת ממשלה</div>
+                        <div class="ramzor-scoreAcolorDaily">ציון וצבע יומי</div>
+                        <div class="ramzor-newVerifiedFor10K">חולים חדשים לכל 10,000 נפש * </div>
+                        <div class="ramzor-percentagePositive">% הבדיקות החיוביות * </div>
+                        <div class="ramzor-changeVerified">שיעור שינוי מאומתים * </div>
+                        <div class="ramzor-active">חולים פעילים </div>
+                        <div id="ramzor-table-inside-container" class="ramzor-table-inside-container">
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="main-vaccinated-ages">
@@ -494,6 +607,34 @@
                 <span>בדיקות יומיות</span>
             </div>
         </div>
+    </script>
+
+    <script id="ramzor-cities" type="text/html">
+        {{#cities}}
+            <div class="ramzor-city-obj">
+                <div class="Ractive">
+                    <span class="Ractive-text">{{activePatients}}</span>
+                </div>
+                <div class="changeVerified">
+                    <span class="changeVerified-text">{{changeVerified}}</span>
+                </div>
+                <div class="percentagePositive">
+                    <span class="percentagePositive-text">{{percentagePositive}}</span>
+                </div>
+                <div class="newVerifiedFor10K">
+                    <span class="newVerifiedFor10K-text">{{newVerifiedFor10K}}</span>
+                </div>
+                <div class="scoreAcolorDaily">
+                    <span class="spotlight-score"> {{dailyScore}} </span>
+                </div>
+                <div class="governementColor">
+                    <span class="government-score">{{GovernmentScore}}</span>
+                </div>
+                <div class="Rcity">
+                    <span class="ramzor-city-name">{{city}}</span>
+                </div>
+            </div>
+        {{/cities}}
     </script>
 
     <script src="https://unpkg.com/mustache@latest"></script>

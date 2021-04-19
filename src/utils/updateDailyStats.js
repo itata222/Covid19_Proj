@@ -55,24 +55,24 @@ const createDailyStatsEveryMidnight = () => {
 createDailyStatsEveryMidnight()
 
 // const createData = async () => {
-//     for (let i = 60; i > 0; i--) {
+//     for (let i = 60; i >= 0; i--) {
 //         const today = new Date();
 //         today.setDate(today.getDate() - i)
 //         const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
 //         const newDayStatsData = {
 //             date: todayDate,
-//             activePatients: Math.floor(i * 80) + 1,
-//             isolationAtHotels: Math.floor(i * 7) + 1,
-//             isolationAtHospitals: Math.floor(i * 3) + 1,
-//             isolationAtHome: Math.floor(i * 70) + 1,
-//             criticalPatients: Math.floor(i * 2) + 1,
-//             ventilatedPatients: Math.floor(i * 1.5) + 1,
-//             severePatients: Math.floor(i * 4) + 1,
-//             totalDeaths: Math.floor(i / 10 * 40) + 1,
-//             vaccinatedFirst: Math.floor(i / 10 * 5000) + 1,
-//             vaccinatedSecond: Math.floor(i / 10 * 4000) + 1,
-//             numberOfTests: Math.floor(Math.random() * 40000) + 1000,
-//             newVerified: Math.floor(i / 10 * 1000) + 1
+//             activePatients: Math.floor(Math.random() * 5000) + 1,
+//             isolationAtHotels: Math.floor(Math.random() * 5000) + 1,
+//             isolationAtHospitals: Math.floor(Math.random() * 100) + 1,
+//             isolationAtHome: Math.floor(Math.random() * 300) + 1,
+//             criticalPatients: Math.floor(Math.random() * 300) + 1,
+//             ventilatedPatients: Math.floor(Math.random() * 200) + 1,
+//             severePatients: Math.floor(Math.random() * 1000) + 1,
+//             totalDeaths: Math.floor(1000 / i) + 1000,
+//             vaccinatedFirst: Math.floor(Math.random() * 22400) + 1000,
+//             vaccinatedSecond: Math.floor(Math.random() * 32244) + 1000,
+//             numberOfTests: Math.floor(Math.random() * 50000) + 1000,
+//             newVerified: Math.floor(Math.random() * 1542) + 10
 //         }
 //         const newDayStats = new DailyStatics(newDayStatsData)
 //         await newDayStats.save();

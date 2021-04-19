@@ -47,6 +47,11 @@ $accessibility-main_card-text-color:$accessibility-all-text-color;
 $accessibility-main_card-background-color:#384f5f;
 $accessibility-main_card-box-shdow:rgba(26,31,51,0.18) 0 8px 4px 0;
 
+$ramzor-colors-red:rgb(250, 158, 143);
+$ramzor-colors-orange:rgb(242, 197, 128);
+$ramzor-colors-yellow:rgb(252, 252, 112);
+$ramzor-colors-green:rgb(184, 222, 146);
+
 @font-face {
     font-family: Open Sans Hebrew;
     src: url('./fonts/OpenSansHebrew-Regular.ttf');
@@ -66,6 +71,13 @@ $accessibility-main_card-box-shdow:rgba(26,31,51,0.18) 0 8px 4px 0;
     padding: 5px;
     display: inline-block;
     border-radius: 50%;
+}
+@mixin ramzor-cube ($cubeBG){
+    width: 22px;
+    height: 22px;
+    border: 1px solid $cubeBG;
+    border-radius: 4px;
+    background-color: $cubeBG;
 }
 ::-webkit-scrollbar-thumb{
     border-radius: 15px!important;
@@ -279,7 +291,7 @@ svg{
 .newVerified-Yesterday-textAndsymbol,.Verified-textAndsymbol,
 .vaccinated-textAndsymbol,.totalDeaths-textAndsymbol,.PercentageOfPositiveTests-textAndsymbol{
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
 }
 .newVerified-Yesterday-text,.Verified-text,.vaccinated-text,
 .totalDeaths-text,.PercentageOfPositiveTests-text{
@@ -290,7 +302,7 @@ svg{
     width: fit-content;
 }
 .newVerified-Yesterday-symbol,.Verified-symbol,.totalDeaths-symbol,
-.PercentageOfPositiveTests-symbol{
+.PercentageOfPositiveTests-symbol,.ramzor-i-symbol{
     height: 24px;
     width: 40px;
     padding-right: 5px;
@@ -441,9 +453,11 @@ svg{
 }
 .indices-firstBox-header-title-container,.indices-secondBox-header-title-container,.indices-thirdBox-header-title-container{
     display: flex;
+    justify-content: space-between;
 }
 .indices-firstBox-header-symbols,.indices-secondBox-header-symbols,.indices-thirdBox-header-symbols{
     display: flex;
+    justify-content: space-between;
 }
 .indices-firstBox-header-legend-container,.indices-secondBox-header-legend-container,.indices-thirdBox-header-legend-container{
     font-size: .9rem;
@@ -494,12 +508,11 @@ svg{
 }
 .indices-firstBox-graph-container,.indices-secondBox-graph-container,.indices-thirdBox-graph-container{
     position: relative;
-    width: 347px;
+    width: 100%;
     height: 247px;
     padding: 0px;
     margin: 0px;
     border-width: 0px;
-
 }
 
 .main-vaccinated-cities,.main-vaccinated-ages,.main-new-patients,.main-ramzor-plan{
@@ -516,6 +529,247 @@ svg{
     height: 21.75rem;
 }
 
-@media(min-width:1100px){
+.ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
+    stroke: #1c7d7e;
+}
+.ct-series-b .ct-bar, .ct-series-b .ct-line, .ct-series-b .ct-point, .ct-series-b .ct-slice-donut {
+    stroke: #b6ca51;
+}
+.ct-series-a .ct-area, .ct-series-a .ct-slice-donut-solid, .ct-series-a .ct-slice-pie{
+    fill:#1c7d7e
+}
+.ct-series-b .ct-area, .ct-series-b .ct-slice-donut-solid, .ct-series-b .ct-slice-pie{
+    fill:#b6ca51
+}
 
+select{
+    border: 1px solid #e4e9f2;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #edf1f7;
+    font-family: 'Open Sans Hebrew';
+}
+
+.ramzor-plan-container{
+    direction: ltr;
+    display: grid;
+    grid-template-areas: 
+    "explan header"
+    "table table";
+    grid-template-rows: 40% 60%;
+    grid-template-columns:40% 60% ;
+    font-family: $regular-all-font-family;
+}
+.ramzor-rightSide-container{
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+.ramzor-header-container{
+    font-size: 1.1rem;
+    font-weight: bolder;
+}
+.ramzor-explenations-container{
+    text-align: start;
+    line-height: 0.9;
+    padding: 2px;
+    .ramzor-explenations{
+        font-size: 0.7rem;
+        font-weight: bolder;
+    }
+}
+.ramzor-date-container{
+    text-align: start;
+    background-color: #e6f1f4;
+    padding-left: 5px;
+    .ramzor-date{
+        font-size: 0.7rem;
+        font-weight: bolder;
+    }
+    .remark-icon{
+        display: inline-block;
+        width: .9rem;
+        height: .9rem;
+        font-size: .8rem;
+        margin: 5px;
+        background-color: #14212b;
+        color: #fff;
+        opacity: .85;
+        text-align: center;
+        line-height: 1.1;
+        border-radius: 50%;
+    }
+}
+.ramzor-search-area-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ramzor-searchCity-container{
+    padding: 5px;
+    border: 1px solid #e4e9f2;
+    border-radius: 25px;
+    align-self: flex-start;
+    width: 70%;
+    display: inline-block;
+}
+.ramzor-search-inside{
+    padding: 2px;
+    display: flex;
+    justify-content: space-around;
+}
+.ramzor-search-text{
+    border: none;
+    text-align: center;
+    width: 70%;
+}
+.ramzor-symbols-container{
+    display: inline-flex;
+}
+.ramzor-leftSide-container{
+    grid-area: explan;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.color-explan-container{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    width: 100%;
+}
+#ramzor-color-explan-cube-red{
+    @include ramzor-cube($ramzor-colors-red);
+}
+#ramzor-color-explan-cube-orange{
+    @include ramzor-cube($ramzor-colors-orange);
+}
+#ramzor-color-explan-cube-yellow{
+    @include ramzor-cube($ramzor-colors-yellow);
+}
+#ramzor-color-explan-cube-green{
+    @include ramzor-cube($ramzor-colors-green);
+}
+.ramzor-color-explan-text-container{
+    line-height: 1.5;
+}
+.ramzor-color-explan-text-line1{
+    font-weight: 600;
+    font-size: .6rem;
+}
+.ramzor-color-explan-text-line2{
+    font-weight: 300;
+    font-size: .55rem;
+    text-align: start;
+    font-style: italic;
+}
+
+.ramzor-table-container{
+    direction: ltr;
+    grid-area: table;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr 1.1fr 1fr 1fr 1.5fr;
+    grid-template-rows: 2fr 3fr;
+    grid-template-areas:
+    "Ractive changeVerified percentagePositive newVerifiedFor10K scoreAcolorDaily governementColor city" 
+    "ramzorT ramzorT ramzorT ramzorT ramzorT ramzorT ramzorT";
+    font-size: .7rem;
+    text-align: center;
+    line-height: 1.4;
+}  
+.ramzor-city{
+    grid-area: city;
+    background-color: #edf1f7;
+    padding-top: 1.2rem;
+} 
+.ramzor-governementColor{
+    grid-area: governementColor;
+    background-color: #edf1f7;
+    padding-top: 0.8rem;
+} 
+.ramzor-scoreAcolorDaily{
+    grid-area: scoreAcolorDaily;
+    background-color: #edf1f7;
+    padding-top: 0.8rem;
+} 
+.ramzor-newVerifiedFor10K{
+    grid-area: newVerifiedFor10K;
+    background-color: #daeaee;
+    padding: 0.1rem;
+} 
+.ramzor-percentagePositive{
+    grid-area: percentagePositive;
+    background-color: #daeaee;
+    padding-top: 0.5rem;
+} 
+.ramzor-changeVerified{
+    grid-area: changeVerified;
+    background-color: #daeaee;
+    padding-top: 0.5rem;
+} 
+.ramzor-active{
+    grid-area: Ractive;
+    background-color: #edf1f7;
+    padding-top: 1rem;
+} 
+
+.ramzor-table-inside-container{
+    grid-area: ramzorT;
+    display: grid !important;
+    grid-auto-rows: 2rem;
+    direction: ltr;
+    overflow-y: auto;
+}
+.ramzor-table-inside-container::-webkit-scrollbar{
+    width: 2px;
+    border-radius: 15px!important;
+}
+.ramzor-city-obj{
+    direction: ltr;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #edf1f7;
+}
+.government-score{
+    background-color: rgb(184, 222, 146);
+    padding: 2px 4px;
+    border-radius: 2px;
+    height: 20px;
+    width: 20px;
+}
+.spotlight-score{
+    background-color: rgb(242, 197, 128);
+    padding: 2px 4px;
+    border-radius: 2px;
+    width: 28px;
+    text-align: center;
+    color: #2c2c2c;
+    font-weight: 700;
+    margin:auto;
+}
+.indices-firstBox-header-title,.indices-secondBox-header-title,.indices-thirdBox-header-title{
+    font-weight: 700;
+}
+.indices-firstBox-leftHeader{
+    display:flex
+}
+@media(min-width:570px){
+
+    .main-section{
+        margin-top: 132px;
+    }
+    .navigation-bar-section{
+        z-index: 10;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+   
 }

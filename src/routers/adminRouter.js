@@ -52,5 +52,11 @@ router.post('/Covid19-site/Admin/createPatient', async (req, res) => {
     }
 })
 
+// router.patch('/Covid19-site/Admin/updateData', async (req, res) => {
+//     const dailyStaticsToUpdate = await DailyStatics.updateMany(req.body, {});
+//     console.log('Number of documents matched:', dailyStaticsToUpdate.n); // Number of documents matched
+//     console.log('Number of documents modified:', dailyStaticsToUpdate.nModified); // Number of documents modified
+// })
+
 
 module.exports = router;

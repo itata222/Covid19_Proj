@@ -20,7 +20,7 @@ fetch(getTodayDataUrl).then((res) => {
     else
         throw res;
 }).then(({ todayData, yesterdayData, personsMidnight, allTimeSumVerified }) => {
-    console.log('todayData:', todayData)
+    // console.log('todayData:', todayData)
     // console.log(personsMidnight)
     let activePatientsMidnight = 0, newPatientsMidnight = 0, severePatientsMidnight = 0, vaccinatedFirstFromMidnight = 0, vaccinatedSecondFromMidnight = 0;
     personsMidnight.forEach(person => {
