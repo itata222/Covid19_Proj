@@ -19,7 +19,7 @@ fetch(getTodayDataUrl).then((res) => {
         return res.json();
     else
         throw res;
-}).then(({ todayData, yesterdayData, personsMidnight, allTimeSumVerified }) => {
+}).then(({ todayData, yesterdayData, personsMidnight, allTimeSumVerified, alltimeVaccinatedFirst, alltimeVaccinatedSecond }) => {
     // console.log('todayData:', todayData)
     // console.log(personsMidnight)
     let activePatientsMidnight = 0, newPatientsMidnight = 0, severePatientsMidnight = 0, vaccinatedFirstFromMidnight = 0, vaccinatedSecondFromMidnight = 0;
@@ -36,45 +36,45 @@ fetch(getTodayDataUrl).then((res) => {
             vaccinatedSecondFromMidnight++;
     });
     const mainBox1Rendered = Mustache.render(mainBox1Template, {
-        newVerifiedYesterday: yesterdayData.newVerified,
+        newVerifiedYesterday: new Intl.NumberFormat().format(yesterdayData.newVerified),
         newVerifiedMidNight: `${newPatientsMidnight}${newPatientsMidnight >= 0 ? '+' : '-'}`,
-        newVerifiedAll: allTimeSumVerified
+        newVerifiedAll: new Intl.NumberFormat().format(allTimeSumVerified)
     })
     mainBox1Container.insertAdjacentHTML('beforeend', mainBox1Rendered)
 
     const mainBox2Rendered = Mustache.render(mainBox2Template, {
-        verifiedSum: todayData.activePatients,
+        verifiedSum: new Intl.NumberFormat().format(todayData.activePatients),
         verifiedMidnight: `${activePatientsMidnight}${activePatientsMidnight >= 0 ? '+' : '-'}`,
-        hospital: todayData.isolationAtHospitals,
-        hotel: todayData.isolationAtHotels,
-        home: todayData.isolationAtHome
+        hospital: new Intl.NumberFormat().format(todayData.isolationAtHospitals),
+        hotel: new Intl.NumberFormat().format(todayData.isolationAtHotels),
+        home: new Intl.NumberFormat().format(todayData.isolationAtHome)
     })
     mainBox2Container.insertAdjacentHTML('beforeend', mainBox2Rendered)
 
     const mainBox3Rendered = Mustache.render(mainBox3Template, {
-        severePatientsAll: todayData.severePatients,
+        severePatientsAll: new Intl.NumberFormat().format(todayData.severePatients),
         severePatientsMidNight: `${severePatientsMidnight}${severePatientsMidnight >= 0 ? '+' : '-'}`,
-        criticalPatients: todayData.criticalPatients,
-        ventilatedPatients: todayData.ventilatedPatients,
+        criticalPatients: new Intl.NumberFormat().format(todayData.criticalPatients),
+        ventilatedPatients: new Intl.NumberFormat().format(todayData.ventilatedPatients),
     })
     mainBox3Container.insertAdjacentHTML('beforeend', mainBox3Rendered)
 
     const mainBox4Rendered = Mustache.render(mainBox4Template, {
-        vaccinatedFirst: todayData.vaccinatedFirst,
+        vaccinatedFirst: new Intl.NumberFormat().format(alltimeVaccinatedFirst),
         vaccinatedFirstMidnight: `${vaccinatedFirstFromMidnight}${vaccinatedFirstFromMidnight >= 0 ? '+' : '-'}`,
-        vaccinatedSecond: todayData.vaccinatedSecond,
+        vaccinatedSecond: new Intl.NumberFormat().format(alltimeVaccinatedSecond),
         vaccinatedSecondMidnight: `${vaccinatedSecondFromMidnight}${vaccinatedSecondFromMidnight >= 0 ? '+' : '-'}`,
     })
     mainBox4Container.insertAdjacentHTML('beforeend', mainBox4Rendered)
 
     const mainBox5Rendered = Mustache.render(mainBox5Template, {
-        totalDeaths: todayData.totalDeaths,
+        totalDeaths: new Intl.NumberFormat().format(todayData.totalDeaths),
     })
     mainBox5Container.insertAdjacentHTML('beforeend', mainBox5Rendered)
 
     const mainBox6Rendered = Mustache.render(mainBox6Template, {
         PercentageOfPositiveTestsYesterday: `${0.5}%`,
-        sumTestsYesterday: yesterdayData.numberOfTests
+        sumTestsYesterday: new Intl.NumberFormat().format(yesterdayData.numberOfTests)
     })
     mainBox6Container.insertAdjacentHTML('beforeend', mainBox6Rendered)
 }).catch((e) => {

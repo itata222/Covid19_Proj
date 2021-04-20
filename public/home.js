@@ -13,6 +13,7 @@ const indicesTimeframeDropdownBox2 = document.getElementById('indices-timeframe-
 const indicesTimeframeDropdownBox3 = document.getElementById('indices-timeframe-dropdown3')
 let indicesGraph1Data = {}, indicesGraph2Data = {}, indicesGraph3Data = {};
 
+
 const ramzorCitiesTemplate = document.getElementById('ramzor-cities').innerHTML;
 const ramzorCitiesContainer = document.getElementById('ramzor-table-inside-container')
 
@@ -141,9 +142,11 @@ const getDataByDropDownLists = (BoxNumber, timeframe) => {
             fullWidth: true,
             height: '259px',
             axisX: {
-                showGrid: false
+                showGrid: false,
+
             },
             axisY: {
+
             }
         })
         const secondGraph = new Chartist.Line('.ct-chart2', indicesGraph2Data, {
@@ -164,7 +167,6 @@ const getDataByDropDownLists = (BoxNumber, timeframe) => {
             // As this is axis specific we need to tell Chartist to use whole numbers only on the concerned axis
             axisY: {
                 onlyInteger: true,
-
                 offset: 20
             },
             axisX: {
