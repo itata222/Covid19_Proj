@@ -1,8 +1,10 @@
 const schedule = require('node-schedule');
+const CityDailyStats = require('../models/CityDailyStatsModel');
 const DailyStatics = require('../models/DailyStaticsModel')
 
 const updateDailyStats = (patient, todayStats) => {
-    todayStats.activePatients++;
+    if (patient.condition !== 'healthy')
+        todayStats.activePatients++;
 
     switch (patient.condition) {
         case 'Severe':
@@ -54,7 +56,37 @@ const createDailyStatsEveryMidnight = () => {
 }
 createDailyStatsEveryMidnight()
 
-// const createData = async () => {
+createCityDataEveryMidnight = () => {
+    const job = schedule.scheduleJob('01 00 * * *', async function () {
+        const today = new Date();
+        const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+        const cityDailyStatsAll = await CityDailyStats.find({});
+        const cityObj = {};
+
+        for (let cityStats of cityDailyStatsAll) {
+            let currentCity = cityStats.city
+            cityObj[currentCity] = (cityObj[currentCity] || 0) + 1;
+        }
+        for (let city in cityobj) {
+            const currentCityDailyStats = await CityDailyStats.find({ city });
+            const newDayStatsData = {
+                date: todayDate,
+                city,
+                numberOfResidents: currentCityDailyStats.numberOfResidents,
+                currentActivePatients: 0,
+                numberOfTests: 0,
+                numberOfPositiveTests: 0,
+                governmentScore: '',
+                dailyScore: 0
+            }
+            const newDayStats = new CityDailyStats(newDayStatsData)
+            await newDayStats.save();
+        }
+    });
+}
+createCityDataEveryMidnight()
+
+// const createDailyStatsData = async () => {
 //     for (let i = 60; i >= 0; i--) {
 //         const today = new Date();
 //         today.setDate(today.getDate() - i)
@@ -62,9 +94,9 @@ createDailyStatsEveryMidnight()
 //         const newDayStatsData = {
 //             date: todayDate,
 //             activePatients: Math.floor(Math.random() * 5000) + 1,
-//             isolationAtHotels: Math.floor(Math.random() * 5000) + 1,
+//             isolationAtHotels: Math.floor(Math.random() * 500) + 1,
 //             isolationAtHospitals: Math.floor(Math.random() * 100) + 1,
-//             isolationAtHome: Math.floor(Math.random() * 300) + 1,
+//             isolationAtHome: Math.floor(Math.random() * 3000) + 1,
 //             criticalPatients: Math.floor(Math.random() * 300) + 1,
 //             ventilatedPatients: Math.floor(Math.random() * 200) + 1,
 //             severePatients: Math.floor(Math.random() * 1000) + 1,
@@ -78,6 +110,27 @@ createDailyStatsEveryMidnight()
 //         await newDayStats.save();
 //     }
 // }
-// createData()
+// createDailyStatsData()
+
+// crateCitiesData = async () => {
+//     for (let i = 4; i >= 0; i--) {
+//         const today = new Date();
+//         today.setDate(today.getDate() - i)
+//         const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+//         const cityData = {
+//             date: todayDate,
+//             city: "ירושלים",
+//             numberOfResidents: 136817,
+//             currentActivePatients: Math.floor(Math.random() * 1800) + 160,
+//             numberOfTests: Math.floor(Math.random() * 6700) + 200,
+//             numberOfPositiveTests: Math.floor(Math.random() * 500),
+//             governmentScore: "red",
+//             dailyScore: Math.floor(Math.random() * 8) + 2
+//         }
+//         const newDayCityStats = new CityDailyStats(cityData)
+//         await newDayCityStats.save();
+//     }
+// }
+// crateCitiesData()
 
 module.exports = { updateDailyStats }

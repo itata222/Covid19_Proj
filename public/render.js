@@ -12,6 +12,9 @@ const mainBox5Container = document.getElementById('main-box5-totalDeaths-contain
 const mainBox6Template = document.getElementById('mainBox6Template').innerHTML
 const mainBox6Container = document.getElementById('main-box6-PercentageOfPositiveTests-container')
 
+const PercentageOfPositiveTestsGraph = document.getElementsByClassName('PercentageOfPositiveTests-graph')[0]
+const totalDeathsSymbol = document.getElementsByClassName('totalDeaths-graph-container')[0]
+
 const getTodayDataUrl = '/Covid19-site/GetDailyStatics'
 
 fetch(getTodayDataUrl).then((res) => {
@@ -70,13 +73,17 @@ fetch(getTodayDataUrl).then((res) => {
     const mainBox5Rendered = Mustache.render(mainBox5Template, {
         totalDeaths: new Intl.NumberFormat().format(todayData.totalDeaths),
     })
-    mainBox5Container.insertAdjacentHTML('beforeend', mainBox5Rendered)
+    mainBox5Container.insertAdjacentHTML('afterbegin', mainBox5Rendered)
+    totalDeathsSymbol.className = "totalDeaths-graph-container";
+
 
     const mainBox6Rendered = Mustache.render(mainBox6Template, {
         PercentageOfPositiveTestsYesterday: `${0.5}%`,
         sumTestsYesterday: new Intl.NumberFormat().format(yesterdayData.numberOfTests)
     })
-    mainBox6Container.insertAdjacentHTML('beforeend', mainBox6Rendered)
+    mainBox6Container.insertAdjacentHTML('afterbegin', mainBox6Rendered)
+    PercentageOfPositiveTestsGraph.className = "PercentageOfPositiveTests-graph";
+
 }).catch((e) => {
     console.log(e)
 })

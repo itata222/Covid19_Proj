@@ -1,10 +1,16 @@
 const mongoose = require('mongoose')
 
-const CityStaticsScheme = new mongoose.Schema(
+const CityStatsScheme = new mongoose.Schema(
     {
-        city: {
+        date: {
             type: String,
             required: true
+        },
+        city: {
+            type: String,
+            required: true,
+            trim: true,
+            unique: false
         },
         numberOfResidents: {
             type: Number,
@@ -23,6 +29,15 @@ const CityStaticsScheme = new mongoose.Schema(
             type: Number,
             required: true,
             min: 0
+        },
+        governmentScore: {
+            type: String,
+            required: true,
+            lowercase: true,
+        },
+        dailyScore: {
+            type: Number,
+            required: true
         }
     },
     {
@@ -31,6 +46,6 @@ const CityStaticsScheme = new mongoose.Schema(
 )
 
 
-const CityStatics = mongoose.model("City-Static", CityStaticsScheme);
+const CityDailyStats = mongoose.model("CityDailyStats", CityStatsScheme);
 
-module.exports = CityStatics;
+module.exports = CityDailyStats;

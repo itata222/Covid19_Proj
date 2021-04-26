@@ -6,6 +6,7 @@ const personScheme = new mongoose.Schema(
         id: {
             type: String,
             required: true,
+            minLength: 5,
             trim: true,
             unique: [true, 'ID must be unique']
         },
@@ -14,26 +15,16 @@ const personScheme = new mongoose.Schema(
             required: [true, "Name is required"],
             trim: true
         },
-        email: {
-            type: String,
-            required: false,
-            trim: true,
-            lowercase: true,
-            unique: true,
-            validate(value) {
-                if (!validator.isEmail(value)) {
-                    throw new Error("Invalid Email");
-                }
-            },
-        },
         phone: {
             type: String,
+            minLength: 5,
             required: [true, "Phone is required"],
             trim: true
         },
         condition: {
             type: String,
             required: true,
+            minLength: 5,
             //Healthy,Light,Medium,Severe,Critical,Ventilated
         },
         qurantinedAt: {
@@ -46,6 +37,11 @@ const personScheme = new mongoose.Schema(
             min: 0,
             max: 2
             //0-None,1-Once,2-Twice
+        },
+        city: {
+            type: String,
+            required: true,
+            minLength: 1,
         }
     },
     {

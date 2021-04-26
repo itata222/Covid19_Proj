@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="icon" type="image/png" href="https://datadashboard.health.gov.il/COVID-19/favicon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="./home.css" type="text/css">
+    <title>קורונה - לוח בקרה</title>
+</head>
+<body>
+    <div id="body-container" class="layout-regular">
+        <div class="navigation-bar-section">
+            <div class="navigation-bar-container">
+                <div class="navigation-bar-colored-line"> </div>
+                <div class="navigation-bar-data">
+                    <div class="nb-data1">
+                        <button class="nb_data1-button">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-menu-outline" fill="currentColor"><g data-name="Layer 2"><g data-name="menu">
+                                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                                        <rect x="3" y="11" width="18" height="2" rx=".95" ry=".95"></rect><rect x="3" y="16" width="18" height="2" rx=".95" ry=".95"></rect>
+                                        <rect x="3" y="6" width="18" height="2" rx=".95" ry=".95"></rect></g></g>
+                                </svg>
+                            </span>
+                        </button>
+                        <img class="nb_data1-img" src="https://datadashboard.health.gov.il/COVID-19/assets/images/logo_DAshboard-01.png" alt="Israel iconic symbol">
+                    </div>
+                    <div class="nb-data3">
+                        <span class="nb-data3_title">נגיף הקורונה בישראל - תמונת מצב כללית</span>
+                        <div class="nb-data3_sub-title">
+                            <span class="nb-data3-text1">עדכון אחרון: </span>
+                            <span class="nb-data3-text2">20 באפריל 2021 | 08:54</span>
+                        </div>
+                    </div>
+                    <div class="nb-data2">
+                        <button id="accessibility-button" class="nb_data2-button">
+                            <span id="accessibility-text">לתצוגה נגישה</span>
+                        </button>
+                        <button id="admin-button" class="nb_data2-admin-button">
+                            <span id="admin-text">להתנתקות</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="admin-main-section">
+            <div class="admin-persons-container">
+                <div class="admin-persons-header">
+                    <span class="admin-persons-header-text">אנשים</span>
+                </div>
+                <div class="admin-persons-afterHeader-container">
+                    <div class="admin-persons-filter-container">
+                        <div class="admin-persons-search-container">
+                            <div class="admin-persons-search-inside">
+                                <span class="admin-persons-search-symbol">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <input class="admin-persons-search-input" type="text" placeholder="ID">
+                            </div>
+                        </div>
+                        <div class="admin-persons-sort-container">
+                            <div class="admin-persons-sort-inside">
+                                <select name="persons-sort" id="admin-persons-sort-select">
+                                    <option value="a..z">a..z</option>
+                                    <option value="z..a">z..a</option>
+                                    <option value="age-ascending">age ascending</option>
+                                    <option value="age-descending">age descending</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-persons-addPerson-container">
+                        <button class="admin-persons-addPerson-button-pre">הוספת בן אדם</button>
+                        <div class="admin-persons-addPerson-form-container">
+                            <form class="admin-persons-addPerson-form">
+                                <input type="text" placeholder="id">
+                                <input type="text" placeholder="name">
+                                <input type="text" placeholder="phone">
+                                <input type="text" placeholder="condition">
+                                <input type="text" placeholder="quarantied at">
+                                <input type="number" placeholder="vaccinated">
+                                <input type="text" placeholder="city">
+                                <button class="admin-persons-addPerson-button">הוספה</button>
+                            </form>
+                        </div>
+                    </div>                 
+                </div>
+                <div class="admin-persons-allPersons-container">
+                    <div id="admin-persons-table-container" class="admin-persons-table-container">
+                        <div class="admin-persons-table-headers">
+                            <div class="admin-persons-table-id-container">
+                                <span class="admin-persons-table-id-text">ID</span>
+                            </div>
+                            <div class="admin-persons-table-name-container">
+                                <span class="admin-persons-table-name-text">Name</span>
+                            </div>
+                            <div class="admin-persons-table-city-container none">
+                                <span class="admin-persons-table-city-text">City</span>
+                            </div>
+                            <div class="admin-persons-table-phone-container none">
+                                <span class="admin-persons-table-phone-text">Phone</span>
+                            </div>
+                            <div class="admin-persons-table-condition-container none">
+                                <span class="admin-persons-table-condition-text">Condition</span>
+                            </div>
+                            <div class="admin-persons-table-qurantinedAt-container none">
+                                <span class="admin-persons-table-qurantinedAt-text">quarantied at</span>
+                            </div>
+                            <div class="admin-persons-table-vaccinated-container none">
+                                <span class="admin-persons-table-vaccinated-text">Vaccinated</span>
+                            </div>
+                            <div class="admin-persons-table-saveButton-container none">
+                                <span class="admin-persons-table-saveButton-text"></span>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-cities-container">
+                <div class="admin-cities-header">
+                    <span class="admin-cities-header-text">יישובים</span>
+                </div>
+                <div class="admin-cities-filter-container">
+                    <div class="admin-cities-search-container">
+                        <div class="admin-cities-search-inside">
+                            <span class="admin-cities-search-symbol">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <input class="admin-cities-search-input" type="text" placeholder="City name">
+                        </div>
+                    </div>
+                    <div class="admin-cities-sort-container">
+                        <div class="admin-cities-sort-inside">
+                            <select name="cities-sort" id="admin-cities-sort-select">
+                                <option value="most-residents-AS">↑ Populated</option>
+                                <option value="most-residents-DS">↓ Populated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="admin-cities-table-container" class="admin-cities-table-container">
+                    <div class="admin-cities-table-headers">
+                        <div class="admin-cities-table-name-container">
+                            <span class="admin-cities-table-name-text">City</span>
+                        </div>
+                        <div class="admin-cities-table-residents-container">
+                            <span class="admin-cities-table-residents-text">Residents</span>
+                        </div>
+                        <div class="admin-cities-table-activePatients-container none">
+                            <span class="admin-cities-table-activePatients-text">Active Patients</span>
+                        </div>
+                        <div class="admin-cities-table-numberOfTests-container none">
+                            <span class="admin-cities-table-numberOfTests-text">N. of Tests</span>
+                        </div>
+                        <div class="admin-cities-table-numberOfPositiveTests-container none">
+                            <span class="admin-cities-table-numberOfPositiveTests-text">N. of Positive Tests</span>
+                        </div>
+                        <div class="admin-cities-table-governmentScore-container none">
+                            <span class="admin-cities-table-governmentScore-text">Government Score</span>
+                        </div>
+                        <div class="admin-cities-table-dailyScore-container none">
+                            <span class="admin-cities-table-dailyScore-text">Daily Score</span>
+                        </div>
+                        <div class="admin-cities-saveButton-container none">
+                            <span class="admin-cities-saveButton"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="admin-persons" type="text/html">
+        {{#persons}}
+            <div class="admin-person-obj">
+                <div class="admin-person-id">
+                    <span class="person-id">{{id}}</span>
+                </div>
+                <div class="admin-person-name">
+                    <span>{{name}}</span>
+                </div>
+                <div class="admin-person-city none">
+                    <span class="span-before none">city:</span> <span id="person-city" class="person-data person-city" aria-placeholder="_______">{{city}}</span>
+                </div>
+                <div class="admin-person-phone none">
+                    <span class="span-before none">phone:</span> <span id="person-phone" class="person-data">{{phone}}</span>
+                </div>
+                <div class="admin-person-condition none">
+                    <span class="span-before none">condition:</span> <span id="person-condition" class="person-data">{{condition}} </span>
+                </div>
+                <div class="admin-person-qurantinedAt none">
+                    <span class="span-before none">quarantined at:</span> <span id="person-quarantinedAt" class="person-data">{{qurantinedAt}}</span>
+                </div>
+                <div class="admin-person-vaccinated none">
+                    <span class="span-before none">vaccinated:</span> <span id="person-vaccinated" class="person-data">{{vaccinated}}</span>
+                </div>
+                <div class="admin-person-saveButton-container none">
+                    <button class="admin-person-saveButton">שמירת שינויים</button>
+                </div>
+            </div>
+        {{/persons}}
+    </script>
+
+    <script id="admin-cities" type="text/html">
+        {{#cities}}
+            <div class="admin-city-obj">
+                <div class="admin-city-name">
+                    <span class="city-id">{{city}}</span>
+                </div>
+                <div class="admin-city-residents">
+                    <span class="city-data">{{numberOfResidents}}</span>
+                </div>
+                <div class="admin-city-activePatients none">
+                    <span class="span-before-C none">active patients:</span> <span class="city-data person-city" aria-placeholder="_______">{{currentActivePatients}}</span>
+                </div>
+                <div class="admin-city-numberOfTests none">
+                    <span class="span-before-C none">number of tests:</span> <span class="city-data" aria-placeholder="_______">{{numberOfTests}}</span>
+                </div>
+                <div class="admin-city-numberOfPositiveTests none">
+                    <span class="span-before-C none">number of positive tests:</span> <span class="city-data" aria-placeholder="_______">{{numberOfPositiveTests}} </span>
+                </div>
+                <div class="admin-city-governmentScore none">
+                    <span class="span-before-C none">government score:</span> <span class="city-data" aria-placeholder="_______">{{governmentScore}}</span>
+                </div>
+                <div class="admin-city-dailyScore none">
+                    <span class="span-before-C none">daily score:</span> <span class="city-data" aria-placeholder="_______">{{dailyScore}}</span>
+                </div>
+                <div class="admin-city-saveButton-container none">
+                    <button class="admin-city-saveButton">שמירת שינויים</button>
+                </div>
+            </div>
+        {{/cities}}
+    </script>
+
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="./adminPage.js"></script>
+</body>
+</html>

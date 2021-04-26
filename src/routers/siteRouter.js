@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const CityDailyStats = require('../models/CityDailyStatsModel');
 const DailyStatics = require('../models/DailyStaticsModel');
 const Person = require('../models/PersonModel');
 
@@ -60,6 +61,44 @@ router.get('/Covid19-site/GetDataPeriodOf', async (req, res) => {
     }
 })
 
+router.post('/Covid19-site/createCityData', async (req, res) => {
+    try {
+        const city = new CityStatics(req.body)
+        if (!city)
+            res.status(400).send({
+                status: 400,
+                message: 'bad request'
+            })
+        city.newVerifiedFor10K = city.numberOfPositiveTests / city.numberOfResidents * 10000
+        city.percentagePositive = city.numberOfTests / city.numberOfPositiveTests
+        city.changeVerified = city.currentActivePatients /
+            await city.save()
+        res.send(city)
+    } catch (e) {
+        res.status(500).send({
+            status: 400,
+            message: e
+        })
+    }
+})
+router.get('/Covid19-site/getDayDataCities', async (req, res) => {
+    try {
+        const today = new Date();
+        const weekago = new Date();
+        weekago.setDate(weekago.getDate() - 7);
+        const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+        const weekagoDate = `${weekago.getDate()}.${weekago.getMonth() + 1}.${weekago.getFullYear()}`;
+        const citiesToday = await CityDailyStats.find({ date: todayDate })
+        const citiesWeekAgo = await CityDailyStats.find({ date: weekagoDate })
+
+        res.send({ citiesToday, citiesWeekAgo })
+    } catch (e) {
+        res.status(500).send({
+            status: 400,
+            message: e
+        })
+    }
+})
 
 
 

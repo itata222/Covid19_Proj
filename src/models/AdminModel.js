@@ -79,10 +79,9 @@ adminSchema.methods.generateAuthToken = async function () {
         },
         process.env.TOKEN_SECRET,
         {
-            expiresIn: "6h"
+            expiresIn: "4h"
         }
     );
-
     admin.tokens = admin.tokens.concat({ token });
     await admin.save();
     return token;
