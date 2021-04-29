@@ -15,20 +15,16 @@ router.get('/Covid19-site/GetDailyStatics', async (req, res) => {
         const todayData = await DailyStatics.findOne({ date: todayDate })
         const yesterdayData = await DailyStatics.findOne({ date: yesterdayDate })
         const allTimeData = await DailyStatics.find({})
-        let allTimeSumVerified = 0;
-        let alltimeVaccinatedFirst = 0, alltimeVaccinatedSecond = 0;
+        const personsMidnight = await Person.find({ $or: [{ createdAt: { $gte: new Date(today.getFullYear(), today.getMonth(), today.getDate()) } }, { updatedAt: { $gte: new Date(today.getFullYear(), today.getMonth(), today.getDate()) } }] })
+        let alltimeVaccinatedFirst = 0, alltimeVaccinatedSecond = 0, allTimeSumVerified = 0;;
+
         allTimeData.forEach(dailyStats => {
             allTimeSumVerified += dailyStats.newVerified;
             alltimeVaccinatedFirst += dailyStats.vaccinatedFirst;
             alltimeVaccinatedSecond += dailyStats.vaccinatedSecond;
         });
-        const personsMidnight = await Person.find({ createdAt: { $gte: new Date(today.getFullYear(), today.getMonth(), today.getDate()) } })
-        if (!todayData)
-            return res.status(404).send({
-                status: 404,
-                message: 'Data not found'
-            })
-        res.send({ todayData, yesterdayData, personsMidnight, allTimeSumVerified, alltimeVaccinatedFirst, alltimeVaccinatedSecond })
+
+        res.send({ todayData, yesterdayData, allTimeSumVerified, alltimeVaccinatedFirst, alltimeVaccinatedSecond, personsMidnight })
     } catch {
         res.status(500).send({
             status: 500,

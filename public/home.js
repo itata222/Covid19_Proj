@@ -1,83 +1,62 @@
+import { AdminFunctions } from './repository/AdminData.js';
+import { DailyDataFunctions } from './repository/DailyData.js'
+
+const mylocalStorage = window.localStorage;
+const bodyContainer = document.getElementById('body-container')
+
 const accessiblityButton = document.getElementById('accessibility-button')
 const accessibilityText = document.getElementById('accessibility-text')
-const bodyContainer = document.getElementById('body-container')
+
 const cards = document.getElementsByClassName('main-box')
 const arrayCards = Array.from(cards);
 const svgPathsI = document.getElementsByClassName('i')
 const arraySvgPathsI = Array.from(svgPathsI)
+
 const indicesContainer = document.getElementsByClassName('main-indices-of-vaccination')[0]
-const TotalDeathsGraphSymbol = document.querySelector('.totalDeaths-graph-symbol');
-const indicesHeader = document.querySelector('.indices-header')
-const otherBoxes = document.querySelector('.main-otherBoxes')
-const otherBoxess = document.querySelectorAll('.indices-others-box')
-const otherBoxesAbove = document.querySelectorAll('.others-indices-aboveone')
-const selectElements = document.getElementsByTagName('select')
-const otherBoxesBeneath = document.querySelectorAll('.others-indices-beneath')
-const otherBoxesss = document.querySelectorAll('.main-new-patients')
-const otherBox1 = document.querySelector('.main-vaccinated-cities')
-const otherBox2 = document.querySelector('.main-others-cube-first')
-const otherBox3 = document.querySelector('.main-others-cube-status-hospitals')
-const otherBox4 = document.querySelector('.main-others-cube-piluah')
-const otherBox5 = document.querySelector('.main-others-cube-workers')
-const otherBox6 = document.querySelectorAll('.main-others-cube')
-const otherBox7 = document.querySelector('.main-ramzor-plan')
+const blancBoxesGroup = document.querySelectorAll('.main-otherBoxes').children;
+const blancBoxesGroup1 = document.querySelectorAll('.indices-others-box');
+const blancBoxesGroup2 = document.querySelectorAll('.others-indices-aboveone');
+const blancBoxesGroup3 = document.querySelectorAll('.others-indices-beneath');
+const blancBoxesGroup4 = document.querySelectorAll('.main-new-patients');
+const blancBoxesGroup5 = document.querySelectorAll('.main-others-cube');
+const otherBoxesGrouped = document.querySelectorAll('.main-others-indices-of-vaccination-grouped')
+
+console.log(blancBoxesGroup1, blancBoxesGroup2, blancBoxesGroup3, blancBoxesGroup4, blancBoxesGroup5, otherBoxesGrouped)
+
 const indicesGraphColor1 = document.querySelectorAll('.legend-circle-first')
 const indicesGraphColor2 = document.querySelectorAll('.legend-circle-second')
+
+const mainRamzorPlanBox = document.querySelector('.main-ramzor-plan');
 const ramzorDateContainer = document.querySelector('.ramzor-date-container')
-const otherBoxesGrouped = document.querySelectorAll('.main-others-indices-of-vaccination-grouped')
-const ramzorShareSymbol = document.querySelector('.indices-secondBox-symbol-share-button')
 const ramzorTableContainer = document.querySelector('.ramzor-table-container')
-const allSymbols = document.querySelectorAll('.symbol')
-const allIsymbols = document.getElementsByClassName('i')
 const ramzorTableTitles = ramzorTableContainer.children
 const ramzorSearchInput = document.querySelector('.ramzor-search-text')
-// console.log(TotalDeathsGraphSymbol)
+
+const allSymbols = document.querySelectorAll('.symbol')
+const allIsymbols = document.getElementsByClassName('i')
+
+let indicesGraph1Data = {}, indicesGraph2Data = {}, indicesGraph3Data = {};
+let firstGraph, secondGraph, thirdGraph;
 const indicesTimeframeDropdownBox1 = document.getElementById('indices-timeframe-dropdown')
 const indicesTimeframeDropdownBox2 = document.getElementById('indices-timeframe-dropdown2')
 const indicesTimeframeDropdownBox3 = document.getElementById('indices-timeframe-dropdown3')
 
-const mylocalStorage = window.localStorage;
-
 const adminButton = document.getElementById('admin-button');
-let allCities = [];
-
-let indicesGraph1Data = {}, indicesGraph2Data = {}, indicesGraph3Data = {};
-let firstGraph, secondGraph, thirdGraph;
-
-const ramzorCitiesTemplate = document.getElementById('ramzor-cities').innerHTML;
-const ramzorCitiesContainer = document.getElementById('ramzor-table-inside-container')
-
-const getVaccinatedDataURL = '/Covid19-site/GetDataPeriodOf?timeframe=';
-const updateDataURL = '/Covid19-site/Admin/updateData';
-const getCitiesURL = '/Covid19-site/getDayDataCities';
-const adminLoginURL = '/Covid19-site/Admin/login-admin';
+const selectElements = document.getElementsByTagName('select');
 
 
-const loginAdmin = (email, password) => {
+const loginAdmin = async (email, password) => {
     const errorDiv = document.getElementsByClassName('onLoadModalError')[0]
-    const data = { email, password }
-    fetch(adminLoginURL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-        .then(response => {
-            console.log(response)
-            if (response.ok)
-                return response.json()
-            else
-                throw response
-        })
-        .then(data => {
-            localStorage.setItem('token', data.currentToken)
-            window.location.href = '/adminPage.html'
-        })
-        .catch((error) => {
-            errorDiv.className = 'onLoadModalError';
-        });
+    let isLoggedSuccess = await AdminFunctions.AdminFuncs.loginAdminFunc({ email, password });
+    if (isLoggedSuccess.currentToken) {
+        localStorage.setItem('token', isLoggedSuccess.currentToken)
+        window.location.href = '/adminPage.html'
+    }
+    else
+        errorDiv.className = 'onLoadModalError';
 }
+
+
 const openModal = () => {
     const onLoadModal = document.createElement('div')
     onLoadModal.className = "onLoadModal"
@@ -131,8 +110,202 @@ const openModal = () => {
 }
 adminButton.addEventListener('click', openModal)
 
+const timeframeCurrent = (timeframe, graphNumber) => {
+    let timeframeINT;
+    switch (timeframe) {
+        case 'till-now':
+            document.getElementById('1till-now').setAttribute('selected', 'selected')
+            document.getElementById('1last-week').selected = false;
+            document.getElementById('1last-2weeks').selected = false;
+            document.getElementById('1last-month').selected = false;
+            timeframeINT = -1;
+            break;
+        case 'last-week':
+            timeframeINT = 7;
+            break;
+        case 'last-2weeks':
+            timeframeINT = 14;
+            break;
+        case 'last-month':
+            timeframeINT = 30;
+            break;
+    }
+    getDataByDropDownLists(graphNumber, timeframeINT)
+}
 
-const changeAccessibilityOfGraphsByState = () => {
+const getDataByDropDownLists = async (BoxNumber, timeframe) => {
+    let arrayOfDates = [], arrayOfVaccinatedFirst = [], arrayOfVaccinatedSecond = [];
+    let arrayOfSumVaccinatedFirst = [], arrayOfSumVaccinatedSecond = [];
+    let arrayOfPercentageVaccinateFirstWithinAllPopulation = [], arrayOfPercentageVaccinateSecondWithinAllPopulation = [];
+
+    const data = await DailyDataFunctions.DailyDataFuncs.getDataOfSpecificTimeFrame(timeframe)
+    let SumVaccinatedFirst = data[0].vaccinatedFirst;
+    let SumVaccinatedSecond = data[0].vaccinatedSecond;
+    let frequancy, entirePopulation = 80000;
+
+    switch (timeframe) {
+        case 30:
+            frequancy = 5
+            break;
+        case 14:
+            frequancy = 3;
+            break;
+        case 7:
+            frequancy = 1;
+            break;
+        default:
+            frequancy = 10;
+            break;
+
+    }
+    data.forEach((dayData, i) => {
+        if (i % frequancy === 0) {
+            let newDate = dayData.date.substring(0, dayData.date.length - 5)
+            arrayOfDates.push(newDate)
+        }
+        else
+            arrayOfDates.push('')
+        arrayOfVaccinatedFirst.push(dayData.vaccinatedFirst)
+        arrayOfVaccinatedSecond.push(dayData.vaccinatedSecond)
+        for (let j = 0; j < i; j++) {
+            SumVaccinatedFirst += data[j + 1].vaccinatedFirst;
+            SumVaccinatedSecond += data[j + 1].vaccinatedSecond;
+        }
+        arrayOfSumVaccinatedFirst.push(SumVaccinatedFirst)
+        arrayOfSumVaccinatedSecond.push(SumVaccinatedSecond)
+
+        arrayOfPercentageVaccinateFirstWithinAllPopulation.push(arrayOfSumVaccinatedFirst[i] / entirePopulation)
+        arrayOfPercentageVaccinateSecondWithinAllPopulation.push(arrayOfSumVaccinatedSecond[i] / entirePopulation)
+    });
+    // console.log(arrayOfSumVaccinatedFirst, arrayOfSumVaccinatedSecond)
+    // console.log(arrayOfVaccinatedFirst, arrayOfVaccinatedSecond)
+
+    if (BoxNumber === 1) {
+        indicesGraph1Data = {
+            labels: arrayOfDates,
+            series: [
+                arrayOfVaccinatedSecond,
+                arrayOfVaccinatedFirst
+            ]
+        }
+
+        firstGraph.update(indicesGraph1Data)
+        changeAccessibilityOfGraphsByState(timeframe, 1)
+    }
+    else if (BoxNumber === 2) {
+        indicesGraph2Data = {
+            labels: arrayOfDates,
+            series: [
+                arrayOfSumVaccinatedSecond,
+                arrayOfSumVaccinatedFirst,
+            ]
+        };
+        secondGraph.update(indicesGraph2Data)
+        changeAccessibilityOfGraphsByState(timeframe, 2)
+    }
+    else if (BoxNumber === 3) {
+        indicesGraph3Data = {
+            labels: arrayOfDates,
+            series: [
+                arrayOfPercentageVaccinateSecondWithinAllPopulation,
+                arrayOfPercentageVaccinateFirstWithinAllPopulation
+            ]
+        };
+        const graphsPoints = document.querySelectorAll('.ct-series-b .ct-point, .ct-series-a .ct-point')
+
+        graphsPoints.forEach((point, i) => {
+            if (point.ownerSVGElement.parentElement.className.includes(3) && timeframe === -1 && i % 50 !== 0) {
+                point.className = 'stroke-none';
+            }
+            else if (point.ownerSVGElement.parentElement.className.includes(3) && timeframe === 30 && i % 4 !== 0)
+                point.className = 'stroke-none';
+        });
+        thirdGraph.update(indicesGraph3Data)
+        changeAccessibilityOfGraphsByState(timeframe, 3)
+    }
+    else {
+        indicesGraph1Data = {
+            labels: arrayOfDates,
+            series: [
+                arrayOfVaccinatedSecond,
+                arrayOfVaccinatedFirst,
+            ]
+        }
+        indicesGraph2Data = {
+            labels: arrayOfDates,
+            series: [
+                arrayOfSumVaccinatedSecond,
+                arrayOfSumVaccinatedFirst,
+            ]
+        };
+        indicesGraph3Data = {
+            labels: arrayOfDates,
+            series: [
+                arrayOfPercentageVaccinateSecondWithinAllPopulation,
+                arrayOfPercentageVaccinateFirstWithinAllPopulation
+            ]
+        };
+
+    }
+    createGraphs()
+
+}
+
+getDataByDropDownLists(0, 30)
+
+const createGraphs = () => {
+    firstGraph = new Chartist.Bar('.ct-chart1', indicesGraph1Data, {
+        stackBars: true,
+        fullWidth: true,
+        height: '259px',
+        axisX: {
+            showGrid: false,
+        },
+    })
+
+    secondGraph = new Chartist.Line('.ct-chart2', indicesGraph2Data, {
+        low: 0,
+        showArea: true,
+        fullWidth: true,
+        height: '259px',
+        axisX: {
+            showGrid: false
+        }
+
+    });
+
+    thirdGraph = new Chartist.Line('.ct-chart3', indicesGraph3Data, {
+        high: 100,
+        low: 0,
+        fullWidth: true,
+        height: '259px',
+        // As this is axis specific we need to tell Chartist to use whole numbers only on the concerned axis
+        axisY: {
+            onlyInteger: true,
+            offset: 20
+        },
+        axisX: {
+            showGrid: false,
+        }
+    });
+
+}
+
+indicesTimeframeDropdownBox1.addEventListener('change', () => {
+    let currentTimeFrame = indicesTimeframeDropdownBox1.value;
+    timeframeCurrent(currentTimeFrame, 1)
+})
+indicesTimeframeDropdownBox2.addEventListener('change', () => {
+    let currentTimeFrame = indicesTimeframeDropdownBox2.value;
+    timeframeCurrent(currentTimeFrame, 2)
+})
+indicesTimeframeDropdownBox3.addEventListener('change', () => {
+    let currentTimeFrame = indicesTimeframeDropdownBox3.value;
+    timeframeCurrent(currentTimeFrame, 3)
+})
+
+
+const changeAccessibilityOfGraphsByState = (timeframe, graphNumber) => {
     const graphsLabels = document.querySelectorAll('.ct-label')
     const graphsLines = document.querySelectorAll('.ct-grid')
     const graphsAreasA = document.querySelectorAll('.ct-series-a .ct-area, .ct-series-a .ct-slice-donut-solid, .ct-series-a .ct-slice-pie')
@@ -170,22 +343,22 @@ const changeAccessibilityOfGraphsByState = () => {
     }
     else {
         graphsAreasA.forEach(area => {
-            area.style.fill = 'rgb(182, 202, 81)';
+            area.style.fill = '#b6ca51';
         })
         graphsAreasB.forEach(area => {
-            area.style.fill = 'rgb(28, 125, 126)';
+            area.style.fill = '#1c7d7e';
         })
         indicesGraphColor1.forEach(circle => {
-            circle.style.backgroundColor = 'rgb(28, 125, 126)'
+            circle.style.backgroundColor = '#b6ca51'
         })
         indicesGraphColor2.forEach(circle => {
-            circle.style.backgroundColor = 'rgb(182, 202, 81)'
+            circle.style.backgroundColor = '#1c7d7e'
         })
         graphsLabels.forEach(text => {
             text.style.color = 'rgba(0,0,0,.4)'
         })
         graphsLines.forEach(text => {
-            console.log(text)
+            // console.log(text)
             text.style.stroke = 'rgba(0,0,0,.2)';
             text.style.strokeWidth = '1px';
             text.style.strokeDasharray = '2px';
@@ -199,7 +372,13 @@ const changeAccessibilityOfGraphsByState = () => {
     }
 }
 const changeAccessibility = () => {
-    const PercentageOfPositiveTestsGraphSymbol = document.getElementsByClassName('.PercentageOfPositiveTests-graph-symbol')[0];
+    document.getElementsByClassName('main-others-cube-status-hospitals')[0].classList.toggle('access-box-color')
+    document.getElementsByClassName('main-others-cube-piluah')[0].classList.toggle('access-box-color')
+    document.getElementsByClassName('main-others-cube-workers')[0].classList.toggle('access-box-color')
+    document.getElementsByClassName('main-vaccinated-cities margin-left')[0].classList.toggle('access-box-color')
+    document.getElementsByClassName('main-others-cube-first')[0].classList.toggle('access-box-color')
+    document.getElementsByClassName('hello')[0].classList.toggle('access-box-color')
+    document.getElementsByClassName('hello')[1].classList.toggle('access-box-color')
 
     bodyContainer.classList.toggle('layout-regular')
     bodyContainer.classList.toggle('layout-accessibility')
@@ -211,40 +390,35 @@ const changeAccessibility = () => {
         path.classList.toggle('accessibility-Svg-path-I')
     });
     indicesContainer.classList.toggle('main-indices-of-vaccination-access')
-    indicesHeader.classList.toggle('header-layout-access')
-    otherBoxess.forEach(box => {
+    document.querySelector('.indices-header').classList.toggle('header-layout-access')
+    blancBoxesGroup1.forEach(box => {
         box.classList.toggle('card-layout-access')
         box.classList.toggle('border-none')
     });
-    otherBoxesAbove.forEach(box => {
-        box.classList.toggle('above-cards-style')
+    blancBoxesGroup4.forEach(box => {
+        box.classList.toggle('card-layout-access')
     });
     const arrayOfiSymbols = Array.from(allIsymbols)
     arrayOfiSymbols.forEach(iSymbol => {
         iSymbol.classList.toggle('i-fill-access')
     });
-    otherBoxesBeneath.forEach(box => {
+    blancBoxesGroup3.forEach(box => {
         box.classList.toggle('beneath-cards-style')
     });
-    otherBoxesss.forEach(box => {
+    blancBoxesGroup2.forEach(box => {
         box.classList.toggle('card-layout-access')
     });
-    otherBox6.forEach(box => {
+    blancBoxesGroup5.forEach(box => {
         box.classList.toggle('card-layout-access')
     });
-    otherBox1.classList.toggle('card-layout-access')
-    otherBox2.classList.toggle('card-layout-access')
-    otherBox3.classList.toggle('card-layout-access')
-    otherBox4.classList.toggle('card-layout-access')
-    otherBox5.classList.toggle('card-layout-access')
-    otherBox7.classList.toggle('card-layout-access')
+    mainRamzorPlanBox.classList.toggle('card-layout-access')
     otherBoxesGrouped.forEach(box => {
-        box.classList.toggle('transparent')
+        box.classList.toggle('card-layout-access')
     })
     allSymbols.forEach(symbol => {
         symbol.classList.toggle('symbol-access-type1')
     })
-    changeAccessibilityOfGraphsByState()
+    changeAccessibilityOfGraphsByState(undefined, -1)
     const arrayOfSelectTags = Array.from(selectElements)
     arrayOfSelectTags.forEach(selectTag => {
         selectTag.classList.toggle('select-access')
@@ -263,243 +437,6 @@ const changeAccessibility = () => {
             ramzorTableTitles[i].classList.toggle('ramzor-table-bg-3special')
     }
 
-    TotalDeathsGraphSymbol.classList.toggle('accessiblity-graph')
+    document.querySelector('.totalDeaths-graph-symbol').classList.toggle('accessiblity-graph')
 }
 accessiblityButton.addEventListener('click', changeAccessibility)
-
-const getDataByDropDownLists = (BoxNumber, timeframe) => {
-    let arrayOfDates = [], arrayOfVaccinatedFirst = [], arrayOfVaccinatedSecond = [];
-    let arrayOfSumVaccinatedFirst = [], arrayOfSumVaccinatedSecond = [];
-    let arrayOfPercentageVaccinateFirstWithinAllPopulation = [], arrayOfPercentageVaccinateSecondWithinAllPopulation = [];
-    fetch(getVaccinatedDataURL + timeframe).then((res) => {
-        if (res.ok)
-            return res.json()
-        else
-            throw res
-    }).then((data) => {
-        let SumVaccinatedFirst = data[0].vaccinatedFirst, SumVaccinatedSecond = data[0].vaccinatedSecond;
-        let frequancy, entirePopulation = 80000;
-        switch (timeframe) {
-            case 30:
-                frequancy = 5
-                break;
-            case 14:
-                frequancy = 3;
-                break;
-            case 7:
-                frequancy = 1;
-                break;
-            default:
-                frequancy = 10;
-                break;
-
-        }
-        data.forEach((dayData, i) => {
-            if (i % frequancy === 0) {
-                let newDate = dayData.date.substring(0, dayData.date.length - 5)
-                arrayOfDates.push(newDate)
-            }
-            else
-                arrayOfDates.push('')
-            arrayOfVaccinatedFirst.push(dayData.vaccinatedFirst)
-            arrayOfVaccinatedSecond.push(dayData.vaccinatedSecond)
-            for (let j = 0; j < i; j++) {
-                SumVaccinatedFirst += data[j + 1].vaccinatedFirst;
-                SumVaccinatedSecond += data[j + 1].vaccinatedSecond;
-            }
-            arrayOfSumVaccinatedFirst.push(SumVaccinatedFirst)
-            arrayOfSumVaccinatedSecond.push(SumVaccinatedSecond)
-            arrayOfPercentageVaccinateFirstWithinAllPopulation.push(arrayOfSumVaccinatedFirst[i] / entirePopulation)
-            arrayOfPercentageVaccinateSecondWithinAllPopulation.push(arrayOfSumVaccinatedSecond[i] / entirePopulation)
-        });
-
-        if (BoxNumber === 1) {
-            indicesGraph1Data = {
-                labels: arrayOfDates,
-                series: [
-                    arrayOfVaccinatedSecond,
-                    arrayOfVaccinatedFirst,
-                ]
-            }
-            firstGraph.update(indicesGraph1Data)
-            changeAccessibilityOfGraphsByState()
-        }
-        else if (BoxNumber === 2) {
-            indicesGraph2Data = {
-                labels: arrayOfDates,
-                series: [
-                    arrayOfSumVaccinatedSecond,
-                    arrayOfSumVaccinatedFirst,
-                ]
-            };
-            secondGraph.update(indicesGraph2Data)
-            changeAccessibilityOfGraphsByState()
-        }
-        else if (BoxNumber === 3) {
-            indicesGraph3Data = {
-                labels: arrayOfDates,
-                series: [
-                    arrayOfPercentageVaccinateSecondWithinAllPopulation,
-                    arrayOfPercentageVaccinateFirstWithinAllPopulation
-                ]
-            };
-            thirdGraph.update(indicesGraph3Data)
-            changeAccessibilityOfGraphsByState()
-        }
-        else {
-            indicesGraph1Data = {
-                labels: arrayOfDates,
-                series: [
-                    arrayOfVaccinatedSecond,
-                    arrayOfVaccinatedFirst,
-                ]
-            }
-            indicesGraph2Data = {
-                labels: arrayOfDates,
-                series: [
-                    arrayOfSumVaccinatedSecond,
-                    arrayOfSumVaccinatedFirst,
-                ]
-            };
-            indicesGraph3Data = {
-                labels: arrayOfDates,
-                series: [
-                    arrayOfPercentageVaccinateSecondWithinAllPopulation,
-                    arrayOfPercentageVaccinateFirstWithinAllPopulation
-                ]
-            };
-
-        }
-        if (BoxNumber === 0)
-            createGraphs()
-    })
-}
-
-//---------chart1 data and settings----------
-getDataByDropDownLists(0, 30)
-
-createGraphs = () => {
-    firstGraph = new Chartist.Bar('.ct-chart1', indicesGraph1Data, {
-        stackBars: true,
-        fullWidth: true,
-        height: '259px',
-        axisX: {
-            showGrid: false,
-        },
-    })
-    secondGraph = new Chartist.Line('.ct-chart2', indicesGraph2Data, {
-        low: 0,
-        showArea: true,
-        fullWidth: true,
-        height: '259px',
-        axisX: {
-            showGrid: false
-        }
-
-    });
-    thirdGraph = new Chartist.Line('.ct-chart3', indicesGraph3Data, {
-        high: 100,
-        low: 0,
-        fullWidth: true,
-        height: '259px',
-        // As this is axis specific we need to tell Chartist to use whole numbers only on the concerned axis
-        axisY: {
-            onlyInteger: true,
-            offset: 20
-        },
-        axisX: {
-            showGrid: false,
-        }
-    });
-}
-
-indicesTimeframeDropdownBox1.addEventListener('change', (e) => {
-    let timeframeINT;
-    let currentTimeFrame = indicesTimeframeDropdownBox1.value;
-    switch (currentTimeFrame) {
-        case 'till-now':
-            document.getElementById('1till-now').setAttribute('selected', 'selected')
-            document.getElementById('1last-week').selected = false;
-            document.getElementById('1last-2weeks').selected = false;
-            document.getElementById('1last-month').selected = false;
-            timeframeINT = -1;
-            break;
-        case 'last-week':
-            timeframeINT = 7;
-            break;
-        case 'last-2weeks':
-            timeframeINT = 14;
-            break;
-        case 'last-month':
-            timeframeINT = 30;
-            break;
-    }
-    getDataByDropDownLists(1, timeframeINT)
-})
-indicesTimeframeDropdownBox2.addEventListener('change', () => {
-    let timeframeINT;
-    let currentTimeFrame = indicesTimeframeDropdownBox2.value;
-    switch (currentTimeFrame) {
-        case 'till-now':
-            timeframeINT = -1;
-            break;
-        case 'last-week':
-            timeframeINT = 7;
-            break;
-        case 'last-2weeks':
-            timeframeINT = 14;
-            break;
-        case 'last-month':
-            timeframeINT = 30;
-            break;
-    }
-    getDataByDropDownLists(2, timeframeINT)
-})
-indicesTimeframeDropdownBox3.addEventListener('change', () => {
-    let timeframeINT;
-    let currentTimeFrame = indicesTimeframeDropdownBox3.value;
-    switch (currentTimeFrame) {
-        case 'till-now':
-            timeframeINT = -1;
-            break;
-        case 'last-week':
-            timeframeINT = 7;
-            break;
-        case 'last-2weeks':
-            timeframeINT = 14;
-            break;
-        case 'last-month':
-            timeframeINT = 30;
-            break;
-    }
-    getDataByDropDownLists(3, timeframeINT)
-})
-
-//-----------------------
-//cities need to be an array of objects. each object possess data for a city !
-
-fetch(getCitiesURL).then((res) => {
-    if (res.ok)
-        return res.json()
-    else
-        throw res
-}).then(({ citiesToday, citiesWeekAgo }) => {
-    console.log(citiesToday)
-    console.log(citiesWeekAgo)
-    citiesToday.forEach(cityToday => {
-        citiesWeekAgo.forEach(cityWeekAgo => {
-            if (cityToday.city === cityWeekAgo.city) {
-                console.log(cityToday.numberOfPositiveTests - cityWeekAgo.numberOfPositiveTests)
-                const newVerifiedFor10K = String((cityToday.numberOfPositiveTests - cityWeekAgo.numberOfPositiveTests) / 100)
-                cityToday.newVerifiedFor10K = newVerifiedFor10K.includes('-') ? newVerifiedFor10K.substr(0, 5) : newVerifiedFor10K.substr(0, 4)
-                cityToday.percentagePositive = Math.floor(cityToday.numberOfTests / cityToday.numberOfPositiveTests) + '%'
-                cityToday.changeVerified = Math.floor(cityToday.currentActivePatients * 100 / cityWeekAgo.currentActivePatients) + '%';
-            }
-        })
-    })
-
-    const html = Mustache.render(ramzorCitiesTemplate, {
-        cities: citiesToday
-    })
-    ramzorCitiesContainer.innerHTML = html
-})

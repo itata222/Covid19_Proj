@@ -25,11 +25,13 @@ const personScheme = new mongoose.Schema(
             type: String,
             required: true,
             minLength: 5,
+            trim: true
             //Healthy,Light,Medium,Severe,Critical,Ventilated
         },
         qurantinedAt: {
             type: String,
-            default: "Home"
+            trim: true,
+            default: "home"
         },
         vaccinated: {
             type: Number,

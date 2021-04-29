@@ -40,7 +40,7 @@
                         <button id="accessibility-button" class="nb_data2-button">
                             <span id="accessibility-text">לתצוגה נגישה</span>
                         </button>
-                        <button id="admin-button" class="nb_data2-admin-button">
+                        <button id="admin-button" class="nb_data2-button">
                             <span id="admin-text">להתנתקות</span>
                         </button>
                     </div>
@@ -48,6 +48,9 @@
             </div>
         </div>
         <div class="admin-main-section">
+            <div class="admin-dailyData-container" id="admin-dailyData-container">
+                
+            </div>
             <div class="admin-persons-container">
                 <div class="admin-persons-header">
                     <span class="admin-persons-header-text">אנשים</span>
@@ -236,7 +239,68 @@
         {{/cities}}
     </script>
 
+    <script id="admin-dailyData" type="text/html">
+        <div class="admin-persons-header">
+            <span class="admin-persons-header-text">נתונים יומיים</span>
+            <div class="admin-dailyData-date-container">
+                <span class="admin-dailyData-date-text">{{date}}נכון לתאריך ה:</span>
+            </div>
+        </div>
+        <div class="admin-dailyData-allPersons-container">
+            <div id="admin-dailyData-table-container" class="admin-dailyData-table-container">
+                    <div class="admin-dailyData admin-dailyData-table-id-container">
+                        <span class="admin-dailyData-table-id-text"> מאומתים חדשים מחצות</span>
+                        <span class="dailyData-value">{{newVerified}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-name-container">
+                        <span class="admin-dailyData-table-name-text">חולים פעילים</span>
+                        <span class="dailyData-value">{{activePatients}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-city-container none">
+                        <span class="admin-dailyData-table-city-text">מבודדים בבית</span>
+                        <span class="dailyData-value">{{isolationAtHome}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-phone-container none">
+                        <span class="admin-dailyData-table-phone-text">מבודדים במלון</span>
+                        <span class="dailyData-value">{{isolationAtHotels}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-condition-container none">
+                        <span class="admin-dailyData-table-condition-text">מבודדים בבית חולים</span>
+                        <span class="dailyData-value">{{isolationAtHospitals}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-qurantinedAt-container none">
+                        <span class="admin-dailyData-table-qurantinedAt-text">חולים קשה</span>
+                        <span class="dailyData-value">{{severePatients}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-vaccinated-container none">
+                        <span class="admin-dailyData-table-vaccinated-text">במצב קריטי</span>
+                        <span class="dailyData-value">{{criticalPatients}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-saveButton-container none">
+                        <span class="admin-dailyData-table-saveButton-text">מונשמים</span>   
+                        <span class="dailyData-value">{{ventilatedPatients}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-qurantinedAt-container none">
+                        <span class="admin-dailyData-table-qurantinedAt-text">מחוסנים מנה ראשונה</span>
+                        <span class="dailyData-value">{{vaccinatedFirst}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-vaccinated-container none">
+                        <span class="admin-dailyData-table-vaccinated-text">מחוסנים מנה שנייה</span>
+                        <span class="dailyData-value">{{vaccinatedSecond}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-saveButton-container none">
+                        <span class="admin-dailyData-table-saveButton-text">סך הכל נפטרים</span> 
+                        <span class="dailyData-value">{{totalDeaths}}</span>
+                    </div>
+                    <div class="admin-dailyData admin-dailyData-table-saveButton-container none">
+                        <span class="admin-dailyData-table-saveButton-text">מספר חיסונים</span> 
+                        <span class="dailyData-value">{{numberOfTests}}</span>  
+                    </div>
+            </div>
+        </div>
+    </script>
+
     <script src="https://unpkg.com/mustache@latest"></script>
-    <script src="./adminPage.js"></script>
+    <script type="module" src="./adminPage.js"></script>
 </body>
 </html>

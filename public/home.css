@@ -189,6 +189,10 @@ svg {
   min-height: 100vh;
 }
 
+.access-box-color {
+  background-color: #384f5f !important;
+}
+
 .main-boxes-container {
   padding: 0.6rem 0.4rem 0.5rem;
   width: 100%;
@@ -327,6 +331,7 @@ svg {
   font-weight: bolder;
   display: grid;
   grid-auto-columns: 1.5rem;
+  column-gap: 0.6rem;
   grid-template-columns: 3fr 1fr 1fr;
 }
 
@@ -606,7 +611,6 @@ svg {
 
 .border-none {
   border: none !important;
-  border-radius: 0 !important;
 }
 
 .above-cards-style {
@@ -621,7 +625,7 @@ svg {
   border-bottom-right-radius: 10px !important;
 }
 
-.legend-circle-first {
+.legend-circle-second {
   background-color: #1c7d7e;
   margin: 0 2px;
   width: 8px;
@@ -641,7 +645,7 @@ svg {
   border-radius: 50%;
 }
 
-.legend-circle-second {
+.legend-circle-first {
   background-color: #b6ca51;
   margin: 0 2px;
   width: 8px;
@@ -691,23 +695,27 @@ svg {
 }
 
 .ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
-  stroke: #1c7d7e;
+  stroke: #b6ca51;
 }
 
 .ct-bar {
   stroke-width: 1.6%;
 }
 
+.ct-point {
+  border: 1px solid white;
+}
+
 .ct-series-b .ct-bar, .ct-series-b .ct-line, .ct-series-b .ct-point, .ct-series-b .ct-slice-donut {
-  stroke: #b6ca51;
+  stroke: #1c7d7e;
 }
 
 .ct-series-a .ct-area, .ct-series-a .ct-slice-donut-solid, .ct-series-a .ct-slice-pie {
-  fill: #1c7d7e;
+  fill: #b6ca51;
 }
 
 .ct-series-b .ct-area, .ct-series-b .ct-slice-donut-solid, .ct-series-b .ct-slice-pie {
-  fill: #b6ca51;
+  fill: #1c7d7e;
 }
 
 .ct-perfect-fourth {
@@ -749,6 +757,7 @@ select {
   background-color: #edf1f7;
   font-family: "Open Sans Hebrew";
   outline: none;
+  transition: background-color 0.3s linear;
 }
 
 .option-access {
@@ -998,17 +1007,81 @@ select {
   border-bottom: 1px solid #edf1f7;
 }
 
-.government-score {
+.stroke-none {
+  stroke: none !important;
+}
+
+.government-score-green {
   background-color: #b8de92;
-  padding: 2px 4px;
+  padding: 2px 12px;
   border-radius: 2px;
   height: 20px;
   width: 20px;
 }
 
-.spotlight-score {
+.government-score-orange {
   background-color: #f2c580;
-  padding: 4px 8px;
+  padding: 2px 12px;
+  border-radius: 2px;
+  height: 20px;
+  width: 20px;
+}
+
+.government-score-yellow {
+  background-color: #fcfc70;
+  padding: 2px 12px;
+  border-radius: 2px;
+  height: 20px;
+  width: 20px;
+}
+
+.government-score-red {
+  background-color: #fa9e8f;
+  padding: 2px 12px;
+  border-radius: 2px;
+  height: 20px;
+  width: 20px;
+}
+
+.spotlight-score-green {
+  background-color: #b8de92;
+  padding: 4px 9px;
+  border-radius: 2px;
+  width: 28px;
+  text-align: center;
+  color: #2c2c2c;
+  font-weight: 700;
+  margin: auto;
+  text-decoration: underline;
+}
+
+.spotlight-score-orange {
+  background-color: #f2c580;
+  padding: 4px 9px;
+  border-radius: 2px;
+  width: 28px;
+  text-align: center;
+  color: #2c2c2c;
+  font-weight: 700;
+  margin: auto;
+  text-decoration: underline;
+}
+
+.spotlight-score-yellow {
+  background-color: #fcfc70;
+  padding: 4px 9px;
+  border-radius: 2px;
+  width: 28px;
+  text-align: center;
+  color: #2c2c2c;
+  font-weight: 700;
+  margin: auto;
+  text-decoration: underline;
+}
+
+.spotlight-score-red {
+  background-color: #fa9e8f;
+  padding: 4px 9px;
   border-radius: 2px;
   width: 28px;
   text-align: center;
@@ -1382,6 +1455,16 @@ select {
   display: grid;
   grid-auto-rows: 3rem;
   height: 20rem;
+  overflow: auto;
+}
+
+.admin-dailyData-table-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .admin-persons-allPersons-table-headers div:last-of-type {
@@ -1423,10 +1506,10 @@ select {
   padding-left: 2.4rem;
   max-height: 10rem;
   background-color: #ccdee2;
-  overflow: visible;
 }
 
 .show-person div, .show-city div {
+  max-height: 5rem;
   margin: 1rem;
 }
 
@@ -1894,6 +1977,15 @@ select {
   }
 }
 @media (min-width: 1000px) {
+  .pointer {
+    cursor: pointer;
+  }
+
+  select:hover {
+    background-color: #dbe3ef;
+    cursor: pointer;
+  }
+
   .main-boxes-margins {
     margin-top: 1rem;
     display: grid;
@@ -1924,6 +2016,16 @@ select {
   }
 }
 @media (min-width: 1200px) {
+  .admin-dailyData {
+    display: block;
+    background-color: white;
+    color: #222b45;
+  }
+
+  .nb-data2 button {
+    cursor: pointer;
+  }
+
   .span-before, .span-before-C {
     display: none;
   }
@@ -2109,7 +2211,7 @@ select {
   }
 
   .main-others-cube-piluah {
-    width: 31.4%;
+    width: 31%;
     background: white;
     height: 358px;
     border-radius: 10px;

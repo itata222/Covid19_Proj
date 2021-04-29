@@ -72,6 +72,24 @@ $ramzor-colors-green:rgb(184, 222, 146);
     display: inline-block;
     border-radius: 50%;
 }
+@mixin government-score($bg) {
+    background-color: $bg;
+    padding: 2px 12px;
+    border-radius: 2px;
+    height: 20px;
+    width: 20px;
+}
+@mixin spotlight-score($bg-spot) {
+    background-color: $bg-spot;
+    padding: 4px 9px;
+    border-radius: 2px;
+    width: 28px;
+    text-align: center;
+    color: #2c2c2c;
+    font-weight: 700;
+    margin:auto;
+    text-decoration: underline;
+}
 @mixin ramzor-cube ($cubeBG){
     width: 22px;
     height: 22px;
@@ -265,7 +283,9 @@ svg{
     width: 95%;
     min-height: 100vh;
 }
-
+.access-box-color{
+    background-color: #384f5f !important;
+}
 .main-boxes-container{
     padding: .6rem .4rem .5rem;
     width: 100%;
@@ -388,6 +408,7 @@ svg{
     font-weight: bolder;
     display: grid;
     grid-auto-columns: 1.5rem;
+    column-gap: 0.6rem;
     grid-template-columns: 3fr 1fr 1fr;
 }
 .box-number{
@@ -613,7 +634,6 @@ svg{
 }
 .border-none{
     border: none !important;
-    border-radius: 0 !important;
 }
 .above-cards-style{
     height: 358px;
@@ -625,13 +645,13 @@ svg{
     border-bottom-left-radius: 10px !important;
     border-bottom-right-radius: 10px !important;
 }
-.legend-circle-first{
+.legend-circle-second{
     @include circle-vaccinated(rgb(28, 125, 126))
 }
 .legend-circle-first-access{
     @include circle-vaccinated(rgb(159, 250, 130))
 }
-.legend-circle-second{
+.legend-circle-first{
     @include circle-vaccinated(rgb(182, 202, 81))
 }
 .legend-circle-second-access{
@@ -640,6 +660,7 @@ svg{
 .none{
     display: none;
 }
+
 .indices-firstBox-graph-container,.indices-secondBox-graph-container,.indices-thirdBox-graph-container{
     position: relative;
     width: 100%;
@@ -664,19 +685,22 @@ svg{
 }
 
 .ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
-    stroke: #1c7d7e;
+    stroke: #b6ca51;
 }
 .ct-bar{
     stroke-width: 1.6%;
 }
+.ct-point{
+    border: 1px solid white;
+}
 .ct-series-b .ct-bar, .ct-series-b .ct-line, .ct-series-b .ct-point, .ct-series-b .ct-slice-donut {
-    stroke: #b6ca51;
+    stroke: #1c7d7e;
 }
 .ct-series-a .ct-area, .ct-series-a .ct-slice-donut-solid, .ct-series-a .ct-slice-pie{
-    fill:#1c7d7e
+    fill:#b6ca51
 }
 .ct-series-b .ct-area, .ct-series-b .ct-slice-donut-solid, .ct-series-b .ct-slice-pie{
-    fill:#b6ca51
+    fill:#1c7d7e
 }
 .ct-perfect-fourth {
     display: block;
@@ -717,6 +741,7 @@ select{
     background-color: #edf1f7;
     font-family: 'Open Sans Hebrew';
     outline: none;
+    transition: background-color 0.3s linear;
 }
 // option[selected]{
 //     background-color: #598bff;
@@ -930,24 +955,35 @@ select{
     align-items: center;
     border-bottom: 1px solid #edf1f7;
 }
-.government-score{
-    background-color: rgb(184, 222, 146);
-    padding: 2px 4px;
-    border-radius: 2px;
-    height: 20px;
-    width: 20px;
+.stroke-none{
+    stroke: none !important;
 }
-.spotlight-score{
-    background-color: rgb(242, 197, 128);
-    padding: 4px 8px;
-    border-radius: 2px;
-    width: 28px;
-    text-align: center;
-    color: #2c2c2c;
-    font-weight: 700;
-    margin:auto;
-    text-decoration: underline;
+.government-score-green{
+    @include government-score( #b8de92)
 }
+.government-score-orange{
+    @include government-score( #f2c580)
+}
+.government-score-yellow{
+    @include government-score( #fcfc70)
+}
+.government-score-red{
+    @include government-score(#fa9e8f)
+}
+
+.spotlight-score-green{
+    @include spotlight-score( #b8de92)
+}
+.spotlight-score-orange{
+    @include spotlight-score( #f2c580)
+}
+.spotlight-score-yellow{
+    @include spotlight-score( #fcfc70)
+}
+.spotlight-score-red{
+    @include spotlight-score(#fa9e8f)
+}
+
 .indices-firstBox-header-title,.indices-secondBox-header-title,.indices-thirdBox-header-title{
     font-weight: 700;
 }
@@ -1272,6 +1308,15 @@ select{
     display: grid;
     grid-auto-rows: 3rem;
     height: 20rem;
+    overflow: auto;
+}
+.admin-dailyData-table-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 .admin-persons-allPersons-table-headers div:last-of-type{
     margin-left: 0;
@@ -1308,9 +1353,9 @@ select{
     padding-left: 2.4rem;
     max-height: 10rem;
     background-color: #ccdee2;
-    overflow: visible;
 }
 .show-person div,.show-city div{
+    max-height: 5rem;
     margin: 1rem;
 }
 
@@ -1673,6 +1718,14 @@ select{
     }
 }
 @media (min-width:1000px) {
+    .pointer{
+        cursor: pointer;
+    }
+    select:hover{
+        background-color: darken($color: #edf1f7, $amount: 5%);
+        cursor: pointer;
+    }
+
     .main-boxes-margins{
         margin-top: 1rem;
         display: grid;
@@ -1699,6 +1752,15 @@ select{
     }
 }
 @media (min-width:1200px) {
+    .admin-dailyData{
+        display: block;
+        background-color: white;
+        color: $regular-all-text-color;
+    }
+
+    .nb-data2 button{
+        cursor: pointer;
+    }
     .span-before,.span-before-C{
         display: none;
     }
@@ -1862,7 +1924,7 @@ select{
         margin-left: 1rem;
     }
     .main-others-cube-piluah{
-        width: 31.4%;
+        width: 31%;
         background: white;
         height: 358px;
         border-radius: 10px;

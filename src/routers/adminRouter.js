@@ -1,6 +1,6 @@
 const express = require('express')
 const auth = require('../middlewares/authAdmin');
-const { updateDailyStats } = require('../utils/updateDailyStats')
+const { updateCityAndDailyDataWhenCreatingAPerson, updateCityAndDailyDataWhenUpdatingAPerson } = require('../repository/updateDBFunctions')
 const DailyStatics = require('../models/DailyStaticsModel');
 const Person = require('../models/PersonModel');
 const Admin = require('../models/AdminModel');
@@ -54,25 +54,6 @@ router.post('/Covid19-site/Admin/logout-admin', auth, async (req, res) => {
     }
 })
 
-router.post('/Covid19-site/Admin/createPatient', auth, async (req, res) => {
-    try {
-        const today = new Date();
-        const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
-        const newPatient = new Person(req.body);
-        const todayStatics = await DailyStatics.findOne({ date: todayDate })
-        if (!todayStatics)
-            res.status(404).send('date not found')
-        updateDailyStats(newPatient, todayStatics)
-        // console.log('todayStats: ', todayStatics)
-        // console.log('patient: ', newPatient)
-        await todayStatics.save();
-        await newPatient.save();
-        res.send({ newPatient, todayStatics });
-    } catch (e) {
-        res.status(500).send(e)
-    }
-})
-
 router.get('/Covid19-site/Admin/getAllPersons', auth, async (req, res) => {
     try {
         const persons = await Person.find({})
@@ -92,7 +73,7 @@ router.get('/Covid19-site/Admin/getAllPersons', auth, async (req, res) => {
 
 router.patch('/Covid19-site/Admin/updatePersonData', auth, async (req, res) => {
     const id = req.query.id;
-    const availableEdits = ['city', 'phone', 'condition', 'quarantinedAt', 'vaccinated']
+    const availableEdits = ['city', 'phone', 'condition', 'qurantinedAt', 'vaccinated']
     for (let key in req.body) {
         if (!availableEdits.includes(key))
             return res.status(404).send({
@@ -101,16 +82,21 @@ router.patch('/Covid19-site/Admin/updatePersonData', auth, async (req, res) => {
             })
     }
     try {
-        console.log(id)
-        const person = await Person.findOneAndUpdate({ id }, req.body, {
+        const personToModify = await Person.findOne({ id });
+
+        const personModified = await Person.findOneAndUpdate({ id }, req.body, {
             new: true,
             runValidators: true
         })
-        if (!person)
+
+        if (!personModified)
             return res.status(404).send('Person not found')
-        console.log(person)
-        await person.save()
-        res.send(person)
+
+        updateCityAndDailyDataWhenUpdatingAPerson(personToModify, personModified)
+
+        let isUpdateSucceeded = await personModified.save()
+        // console.log('99', isUpdateSucceeded)
+        res.send(isUpdateSucceeded)
     } catch (e) {
         res.status(500).send({
             status: 500,
@@ -140,9 +126,40 @@ router.patch('/Covid19-site/Admin/updateCityData', auth, async (req, res) => {
         if (!cityUpdate)
             return res.status(404).send('Person not found')
 
-        console.log(cityUpdate)
         await cityUpdate.save()
         res.send(cityUpdate)
+    } catch (e) {
+        res.status(500).send({
+            status: 500,
+            message: e.message
+        })
+    }
+})
+
+router.patch('/Covid19-site/Admin/updateDailyData', auth, async (req, res) => {
+    const today = new Date();
+    const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+    const availableEdits = ['date', 'newVerified', 'activePatients', 'isolationAtHotels', 'isolationAtHospitals', 'isolationAtHome', 'severePatients',
+        'criticalPatients', 'ventilatedPatients', 'vaccinatedFirst', 'vaccinatedSecond', 'totalDeaths', 'numberOfTests']
+    for (let key in req.body) {
+        if (!availableEdits.includes(key))
+            return res.status(404).send({
+                status: 404,
+                message: 'didnt entered valid key to edit a daily data' + key
+            })
+    }
+    try {
+        const dailyData = await DailyStatics.findOneAndUpdate({ date: todayDate }, req.body, {
+            new: true,
+            runValidators: true
+        })
+
+        if (!dailyData)
+            return res.status(404).send('Person not found')
+
+        console.log(dailyData)
+        await dailyData.save()
+        res.send(dailyData)
     } catch (e) {
         res.status(500).send({
             status: 500,
@@ -154,14 +171,18 @@ router.patch('/Covid19-site/Admin/updateCityData', auth, async (req, res) => {
 router.post('/Covid19-site/Admin/createPerson', auth, async (req, res) => {
     try {
         const person = new Person(req.body)
+        const today = new Date();
+        const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+        const todayData = await DailyStatics.findOne({ date: todayDate })
         if (!person)
             return res.status(400).send({
                 status: 400,
                 message: 'bad request'
             })
-        console.log('3', person)
-        let newPerson = await person.save();
-        console.log('4', newPerson)
+
+        updateCityAndDailyDataWhenCreatingAPerson(person, todayData)
+
+        await person.save();
         res.send(person)
     } catch (e) {
         res.status(400).send(e)
