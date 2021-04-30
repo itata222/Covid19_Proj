@@ -140,9 +140,8 @@ const getAllCitiesDataFunc = async () => {
         const allCitiessData = document.getElementsByClassName('city-data')
         const saveCitiesDetailsButtons = document.getElementsByClassName('admin-city-saveButton');
         const citiesIds = document.getElementsByClassName('city-id');
-        const spanBefores = document.getElementsByClassName('span-before-C')
 
-        let spanBeforesArr = Array.from(spanBefores)
+
         let allCitiesIds = Array.from(citiesIds)
         let allSaveCitiesDetailsButtons = Array.from(saveCitiesDetailsButtons)
         let allCitiesDatasArr = Array.from(allCitiessData);
@@ -158,14 +157,24 @@ const getAllCitiesDataFunc = async () => {
                 e.stopPropagation();
 
                 if (!e.target.className.includes('city-data') && !e.target.className.includes('admin-city-saveButton')) {
-                    const childrens = Array.from(allCitiesObjsArr[i].children)
-                    for (let j = 2; j < childrens.length; j++) {
-                        childrens[j].classList.toggle('none')
-                    }
-                    spanBeforesArr.forEach(span => {
-                        span.classList.toggle('none')
-                    })
                     allCitiesObjsArr[i].classList.toggle('show-city')
+                    const cityObjDataHeaders = Array.from(allCitiesObjsArr[i].children)
+                    for (let j = 2; j < cityObjDataHeaders.length; j++)
+                        cityObjDataHeaders[j].classList.toggle('none')
+                    if (allCitiesObjsArr[i].className.includes('show-city')) {
+                        const spanBefores = document.querySelectorAll('.show-city .span-before-C')
+                        let spanBeforesArr = Array.from(spanBefores)
+                        spanBeforesArr.forEach(span => {
+                            span.classList.remove('none')
+                        })
+                    }
+                    else {
+                        const spanBefores = document.querySelectorAll('.span-before-C')
+                        let spanBeforesArr = Array.from(spanBefores)
+                        spanBeforesArr.forEach(span => {
+                            span.classList.add('none')
+                        })
+                    }
                 }
             })
         }
@@ -209,9 +218,7 @@ const getAllPersons = async () => {
         const allpersonsData = document.getElementsByClassName('person-data')
         const savePersonDetailsButtons = document.getElementsByClassName('admin-person-saveButton');
         const personsIds = document.getElementsByClassName('person-id')
-        const spanBefores = document.getElementsByClassName('span-before')
 
-        let spanBeforesArr = Array.from(spanBefores)
         let allPersonsIds = Array.from(personsIds)
         let allSavePersonsDetailsButtons = Array.from(savePersonDetailsButtons)
         let allpersonsDatasArr = Array.from(allpersonsData);
@@ -226,14 +233,26 @@ const getAllPersons = async () => {
             allPersonsObjsArr[i].addEventListener('click', (e) => {
                 e.stopPropagation()
                 if (!e.target.className.includes('person-data') && !e.target.className.includes('admin-person-saveButton')) {
+                    allPersonsObjsArr[i].classList.toggle('show-person')
+
                     const childrens = Array.from(allPersonsObjsArr[i].children)
                     for (let j = 2; j < childrens.length; j++) {
                         childrens[j].classList.toggle('none')
                     }
-                    allPersonsObjsArr[i].classList.toggle('show-person')
-                    spanBeforesArr.forEach(span => {
-                        span.classList.toggle('none')
-                    })
+
+                    if (allPersonsObjsArr[i].className.includes('show-person')) {
+                        const spanBefores = document.querySelectorAll('.show-person .span-before')
+                        let spanBeforesArr = Array.from(spanBefores)
+                        spanBeforesArr.forEach(span => {
+                            span.classList.remove('none')
+                        })
+                    } else {
+                        const spanBefores = document.querySelectorAll('.span-before')
+                        let spanBeforesArr = Array.from(spanBefores)
+                        spanBeforesArr.forEach(span => {
+                            span.classList.add('none')
+                        })
+                    }
                 }
             })
         }

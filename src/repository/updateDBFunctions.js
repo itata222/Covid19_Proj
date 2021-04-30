@@ -238,24 +238,32 @@ createCityDataEveryMidnight()
 // createDailyStatsData()
 
 // crateCitiesData = async () => {
-//     // for (let i = 4; i >= 0; i--) {
-//     const today = new Date();
-//     // today.setDate(today.getDate() - i)
-//     const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
-//     const cityData = {
-//         date: todayDate,
-//         city: "נס ציונה",
-//         numberOfResidents: 13409,
-//         currentActivePatients: Math.floor(Math.random() * 1800) + 160,
-//         numberOfTests: Math.floor(Math.random() * 6700) + 200,
-//         numberOfPositiveTests: Math.floor(Math.random() * 500),
-//         governmentScore: "orange",
-//         dailyScore: Math.floor(Math.random() * 8) + 2
+//         const cities = ['תל אביב', "ירושלים", "ראשון לציון", "חולון", "אילת", "רחובות", "פרדס חנה", "בנימינה", "כפר סבא", "נהריה"]
+//         const residents = [107938, 129394, 87492, 21423, 9029, 14020, 3029, 3490, 8029, 10203];
+//     for (let i = citiesT.length - 1; i >= 0; i--) {
+//         // for (let j = 6; j > 0; j--) {
+//             const today = new Date();
+//             // today.setDate(today.getDate() - j)
+//             const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+//             const cityData = {
+//                 date: todayDate,
+//                 city: cities[i],
+//                 numberOfResidents: residents[i],
+//                 currentActivePatients: Math.floor(Math.random() * 1800) + 160,
+//                 numberOfTests: Math.floor(Math.random() * 6700) + 200,
+//                 numberOfPositiveTests: Math.floor(Math.random() * 500),
+//                 governmentScore: "orange",
+//                 dailyScore: Math.floor(Math.random() * 8) + 2
+//             }
+//             // console.log(cityData)
+
+//             const newDayCityStats = new CityDailyStats(cityData)
+//             await newDayCityStats.save();
+//         // }
 //     }
-//     const newDayCityStats = new CityDailyStats(cityData)
-//     await newDayCityStats.save();
-//     // }
 // }
 // crateCitiesData()
+
+
 
 module.exports = { updateCityAndDailyDataWhenCreatingAPerson, updateCityAndDailyDataWhenUpdatingAPerson }

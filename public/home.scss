@@ -114,6 +114,68 @@ $ramzor-colors-green:rgb(184, 222, 146);
     border-radius: 2px;
     background-color: $cubeBG;
 }
+@keyframes show{
+    0%{
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes showBox1{
+    0%{
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes showBox2And5{
+    0% {
+        -webkit-transform: rotate(0);
+                transform: rotate(0);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+      }
+}
+@keyframes showBox3{
+    0%{
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes showBox4{
+    0%{
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes showBox6{
+    0%{
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 ::-webkit-scrollbar-thumb{
     border-radius: 15px!important;
     background-color: #969696!important;
@@ -289,6 +351,9 @@ svg{
 .main-boxes-container{
     padding: .6rem .4rem .5rem;
     width: 100%;
+}
+.block{
+    display: block;
 }
 .main-boxes-margins{
     margin: 0 -10px;
@@ -707,6 +772,10 @@ svg{
     position: relative;
     width: 100%;
     height: inherit;
+    
+}
+.ct-perfect-fourth svg{
+    animation: show 0.8s;
 }
 [data-x-axis]::before {
     display: none;
@@ -1305,10 +1374,12 @@ select{
 }
 .admin-persons-table-container,.admin-cities-table-container{
     width: 100%;
-    display: grid;
-    grid-auto-rows: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 20rem;
     overflow: auto;
+    animation: show 0.8s;
 }
 .admin-dailyData-table-container{
     width: 100%;
@@ -1334,8 +1405,9 @@ select{
     font-family: $accessibility-all-font-family;
     font-size: 1rem;
     font-weight: 600;
-    max-height: 3rem;
-    overflow: hidden;
+    height: 3rem;
+    padding: 1rem 0;
+    overflow: visible;
     transition: all 0.2s ease-in-out;
 }
 .admin-persons-table-headers,.admin-cities-table-headers{
@@ -1351,12 +1423,13 @@ select{
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding-left: 2.4rem;
-    max-height: 10rem;
+    height: 12rem;
+    padding: 0;
     background-color: #ccdee2;
 }
 .show-person div,.show-city div{
     max-height: 5rem;
-    margin: 1rem;
+    margin-left: 1rem;
 }
 
 .admin-person-saveButton,.admin-city-saveButton{
@@ -1426,6 +1499,10 @@ select{
     }
 }
 @media(min-width:570px){
+    .show-person div, .show-city div {
+        max-height: 5rem;
+        margin-left: 1.5rem;
+    }
     .admin-persons-container, .admin-cities-container{
         margin-top: 2rem;
     }
@@ -1456,7 +1533,10 @@ select{
 }
 
 @media (min-width:675px) {
-
+    .show-person div, .show-city div {
+        max-height: 5rem;
+        margin: auto;
+    }
     .admin-persons-table-phone-container,.admin-person-phone,.admin-city-numberOfTests,.admin-cities-table-numberOfTests-container{
         display: block;
     }
@@ -1718,6 +1798,28 @@ select{
     }
 }
 @media (min-width:1000px) {
+    .main-box1-newVerified-section{
+        animation: showBox1 0.5s linear both;
+    }
+    .main-box2-activeVerified-section{
+        -webkit-animation: showBox2And5 0.5s ease-in-out both;
+        animation: showBox2And5 0.5s ease-in-out both;
+    }
+    .main-box3-severePatients-section{
+        animation: showBox3 0.5s linear both;
+    }
+    .main-box4-vaccinated-section{
+        -webkit-animation: showBox4 0.5s linear both;
+        animation: showBox4 0.5s linear both;
+    }
+    .main-box5-totalDeaths-section{
+        -webkit-animation: showBox2And5 0.5s ease-in-out both;
+        animation: showBox2And5 0.5s ease-in-out both;
+    }
+    .main-box6-PercentageOfPositiveTests-section{
+        -webkit-animation: showBox4 0.5s linear both;
+        animation: showBox4 0.5s linear both;
+    }
     .pointer{
         cursor: pointer;
     }
@@ -1746,8 +1848,7 @@ select{
     }
     .admin-person-obj div, .admin-persons-table-headers div, .admin-city-obj div, .admin-cities-table-headers div{
         flex-basis: 11%;
-        height: 100%;
-        vertical-align: bottom;
+        margin: 0;
         text-align: center;
     }
 }
@@ -1765,10 +1866,9 @@ select{
         display: none;
     }
     .show-person,.show-city{
-        height: unset;
         display: flex; 
         grid-template-columns: unset; 
-        padding-left: unset; 
+        padding: 0.3rem 0;
         height: 3rem; 
         background-color: unset;
     }
@@ -1779,7 +1879,6 @@ select{
     }
     .admin-person-obj div, .admin-persons-table-headers div, .admin-city-obj div, .admin-cities-table-headers div{
         flex-basis: 10%;
-        height: 100%;
         vertical-align: bottom;
         text-align: center;
     }
