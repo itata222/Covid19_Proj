@@ -95,7 +95,6 @@ router.patch('/Covid19-site/Admin/updatePersonData', auth, async (req, res) => {
         updateCityAndDailyDataWhenUpdatingAPerson(personToModify, personModified)
 
         let isUpdateSucceeded = await personModified.save()
-        // console.log('99', isUpdateSucceeded)
         res.send(isUpdateSucceeded)
     } catch (e) {
         res.status(500).send({
@@ -157,7 +156,6 @@ router.patch('/Covid19-site/Admin/updateDailyData', auth, async (req, res) => {
         if (!dailyData)
             return res.status(404).send('Person not found')
 
-        console.log(dailyData)
         await dailyData.save()
         res.send(dailyData)
     } catch (e) {
@@ -186,7 +184,6 @@ router.post('/Covid19-site/Admin/createPerson', auth, async (req, res) => {
         res.send(person)
     } catch (e) {
         res.status(400).send(e)
-        console.log(e)
     }
 })
 

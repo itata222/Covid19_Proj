@@ -85,6 +85,22 @@ body {
   padding: 0;
 }
 
+.fadeIn {
+  animation: fadeIn 1s ;
+}
+.opacity0{
+  opacity: 0;
+}
+@keyframes fadeIn {
+  0%{
+    opacity:0
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+
 .layout-regular {
   background-color: #edf1f7;
   color: #222b45;
@@ -1256,7 +1272,7 @@ select {
   border: 1px solid #888;
   width: 47vh;
   /* Could be more or less, depending on screen size */
-  height: 47vh;
+  /* height: 47vh; */
   display: flex;
   justify-content: space-around;
   flex-direction: column;

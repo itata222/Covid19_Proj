@@ -34,8 +34,8 @@ export class AdminFunctions {
                     else
                         throw response
                 })
-                .then(data => {
-                    resolve(data)
+                .then(res => {
+                    resolve(res)
                 })
                 .catch((error) => {
                     reject(error)

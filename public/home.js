@@ -1,7 +1,10 @@
-import { AdminFunctions } from './repository/AdminData.js';
-import { DailyDataFunctions } from './repository/DailyData.js'
+/** 
+* TODO: When running the project, make sure to put data with the existing functions at the file AT src->repository->updateDBFunctions
+*/
 
-const mylocalStorage = window.localStorage;
+import { AdminFunctions } from './repository/AdminData.js';
+import { DailyDataFunctions } from './repository/DailyData.js';
+
 const bodyContainer = document.getElementById('body-container')
 
 const accessiblityButton = document.getElementById('accessibility-button')
@@ -13,15 +16,12 @@ const svgPathsI = document.getElementsByClassName('i')
 const arraySvgPathsI = Array.from(svgPathsI)
 
 const indicesContainer = document.getElementsByClassName('main-indices-of-vaccination')[0]
-const blancBoxesGroup = document.querySelectorAll('.main-otherBoxes').children;
 const blancBoxesGroup1 = document.querySelectorAll('.indices-others-box');
 const blancBoxesGroup2 = document.querySelectorAll('.others-indices-aboveone');
 const blancBoxesGroup3 = document.querySelectorAll('.others-indices-beneath');
 const blancBoxesGroup4 = document.querySelectorAll('.main-new-patients');
 const blancBoxesGroup5 = document.querySelectorAll('.main-others-cube');
 const otherBoxesGrouped = document.querySelectorAll('.main-others-indices-of-vaccination-grouped')
-
-console.log(blancBoxesGroup1, blancBoxesGroup2, blancBoxesGroup3, blancBoxesGroup4, blancBoxesGroup5, otherBoxesGrouped)
 
 const indicesGraphColor1 = document.querySelectorAll('.legend-circle-first')
 const indicesGraphColor2 = document.querySelectorAll('.legend-circle-second')
@@ -46,14 +46,15 @@ const selectElements = document.getElementsByTagName('select');
 
 
 const loginAdmin = async (email, password) => {
-    const errorDiv = document.getElementsByClassName('onLoadModalError')[0]
-    let isLoggedSuccess = await AdminFunctions.AdminFuncs.loginAdminFunc({ email, password });
-    if (isLoggedSuccess.currentToken) {
+    const errorDiv = document.getElementsByClassName('onLoadModalError')[0];
+    errorDiv.className = 'onLoadModalError opacity0';
+    try {
+        let isLoggedSuccess = await AdminFunctions.AdminFuncs.loginAdminFunc({ email, password });
         localStorage.setItem('token', isLoggedSuccess.currentToken)
         window.location.href = '/adminPage.html'
+    } catch (e) {
+        errorDiv.className = 'onLoadModalError fadeIn';
     }
-    else
-        errorDiv.className = 'onLoadModalError';
 }
 
 
@@ -82,7 +83,6 @@ const openModal = () => {
     onLoadModalContentForm.addEventListener('submit', (event) => {
         event.preventDefault()
         loginAdmin(onLoadModalContentInput1.value, onLoadModalContentInput2.value)
-        // onLoadModalContentInput1.value = '';
         onLoadModalContentInput2.value = '';
     })
     const onLoadModalContentButton = document.createElement('button')
@@ -138,7 +138,7 @@ const getDataByDropDownLists = async (BoxNumber, timeframe) => {
     let arrayOfSumVaccinatedFirst = [], arrayOfSumVaccinatedSecond = [];
     let arrayOfPercentageVaccinateFirstWithinAllPopulation = [], arrayOfPercentageVaccinateSecondWithinAllPopulation = [];
 
-    const data = await DailyDataFunctions.DailyDataFuncs.getDataOfSpecificTimeFrame(timeframe)
+    const data = await DailyDataFunctions.DailyDataFuncs.getDataOfSpecificTimeFrame(timeframe)    
     let SumVaccinatedFirst = data[0].vaccinatedFirst;
     let SumVaccinatedSecond = data[0].vaccinatedSecond;
     let frequancy, entirePopulation = 80000;
@@ -177,8 +177,6 @@ const getDataByDropDownLists = async (BoxNumber, timeframe) => {
         arrayOfPercentageVaccinateFirstWithinAllPopulation.push(arrayOfSumVaccinatedFirst[i] / entirePopulation)
         arrayOfPercentageVaccinateSecondWithinAllPopulation.push(arrayOfSumVaccinatedSecond[i] / entirePopulation)
     });
-    // console.log(arrayOfSumVaccinatedFirst, arrayOfSumVaccinatedSecond)
-    // console.log(arrayOfVaccinatedFirst, arrayOfVaccinatedSecond)
 
     if (BoxNumber === 1) {
         indicesGraph1Data = {
@@ -246,9 +244,8 @@ const getDataByDropDownLists = async (BoxNumber, timeframe) => {
             ]
         };
 
+        createGraphs()
     }
-    createGraphs()
-
 }
 
 getDataByDropDownLists(0, 30)
@@ -279,7 +276,7 @@ const createGraphs = () => {
         low: 0,
         fullWidth: true,
         height: '259px',
-        // As this is axis specific we need to tell Chartist to use whole numbers only on the concerned axis
+        // * As this is axis specific we need to tell Chartist to use whole numbers only on the concerned axis
         axisY: {
             onlyInteger: true,
             offset: 20
@@ -358,7 +355,6 @@ const changeAccessibilityOfGraphsByState = (timeframe, graphNumber) => {
             text.style.color = 'rgba(0,0,0,.4)'
         })
         graphsLines.forEach(text => {
-            // console.log(text)
             text.style.stroke = 'rgba(0,0,0,.2)';
             text.style.strokeWidth = '1px';
             text.style.strokeDasharray = '2px';

@@ -23,7 +23,6 @@ export class CityDataFunctions {
                 citiesToday.forEach(cityToday => {
                     citiesWeekAgo.forEach(cityWeekAgo => {
                         if (cityToday.city === cityWeekAgo.city) {
-                            // console.log(cityToday.numberOfPositiveTests - cityWeekAgo.numberOfPositiveTests)
                             const newVerifiedFor10K = String((cityToday.numberOfPositiveTests - cityWeekAgo.numberOfPositiveTests) / 100)
                             cityToday.newVerifiedFor10K = newVerifiedFor10K.includes('-') ? newVerifiedFor10K.substr(0, 5) : newVerifiedFor10K.substr(0, 4)
                             cityToday.percentagePositive = Math.floor(cityToday.numberOfPositiveTests * 100 / cityToday.numberOfTests) + '%'

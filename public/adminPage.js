@@ -60,7 +60,6 @@ const renderData = (table) => {
         allPersonsContainer.insertAdjacentHTML('beforeend', html)
     }
     else if (table === 'cities') {
-        // console.log(isMostPopulatedOnTop)
 
         while (allCitiesContainer.children.length > 1) {
             allCitiesContainer.removeChild(allCitiesContainer.lastChild)
@@ -70,11 +69,9 @@ const renderData = (table) => {
             return city.includes(filterCitiesBy)
         })
 
-        // console.log(citiesFiltered)
         citiesFiltered.sort((a, b) => {
             a.numberOfResidents = parseFloat(a.numberOfResidents)
             b.numberOfResidents = parseFloat(b.numberOfResidents)
-            // console.log(isMostPopulatedOnTop, a.numberOfResidents, b.numberOfResidents)
             if (isMostPopulatedOnTop) {
                 if (a.numberOfResidents > b.numberOfResidents) return 1
                 if (a.numberOfResidents < b.numberOfResidents) return -1
@@ -86,7 +83,6 @@ const renderData = (table) => {
             }
         })
 
-        // console.log(citiesFiltered)
         const html = Mustache.render(allCitiesTemplate, {
             cities: citiesFiltered
         })
@@ -194,7 +190,6 @@ const getAllCitiesDataFunc = async () => {
                 }
 
                 let updateCityDataResponse = await AdminFunctions.AdminFuncs.updateCityData(allCitiesIds[i].innerHTML, data)
-                // console.log(updateCityDataResponse)
                 if (!updateCityDataResponse.status)
                     alertModal('Updated City Successfully')
                 else
@@ -256,8 +251,6 @@ const getAllPersons = async () => {
                 }
             })
         }
-
-        // console.log(allPersonsIds, allSavePersonsDetailsButtons)
 
         allSavePersonsDetailsButtons.forEach((saveButton, i) => {
             saveButton.addEventListener('click', async (e) => {

@@ -41,7 +41,6 @@ router.get('/Covid19-site/GetDataPeriodOf', async (req, res) => {
             for (let i = timeframe; i > 0; i--) {
                 const today = new Date();
                 today.setDate(today.getDate() - i);
-                // console.log(i, ':', today)
                 currentDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
                 const dayData = await DailyStatics.findOne({ date: currentDate })
                 arrayOfData.push(dayData)
@@ -86,7 +85,6 @@ router.get('/Covid19-site/getDayDataCities', async (req, res) => {
         const weekagoDate = `${weekago.getDate()}.${weekago.getMonth() + 1}.${weekago.getFullYear()}`;
         const citiesToday = await CityDailyStats.find({ date: todayDate })
         const citiesWeekAgo = await CityDailyStats.find({ date: weekagoDate })
-
         res.send({ citiesToday, citiesWeekAgo })
     } catch (e) {
         res.status(500).send({

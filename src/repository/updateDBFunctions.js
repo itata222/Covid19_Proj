@@ -66,7 +66,6 @@ const updateCityAndDailyDataWhenCreatingAPerson = async (person, todayData) => {
 }
 
 const updateCityAndDailyDataWhenUpdatingAPerson = async (personBefore, personAfter) => {
-    // console.log('51', personBefore, personAfter)
     const todayDataFromDB = await DailyStatics.findOne({ date: todayDate })
     const leftedCityData = await CityDailyStats.findOne({ city: personBefore.city, date: todayDate })
     const joinedCityData = await CityDailyStats.findOne({ city: personAfter.city, date: todayDate })
@@ -149,9 +148,8 @@ const updateCityAndDailyDataWhenUpdatingAPerson = async (personBefore, personAft
         else if (personAfter.vaccinated === 1) todayNewData.vaccinatedFirst = todayDataFromDB.vaccinatedFirst + 1;
     }
 
-    console.log('121', todayNewData)
     const todayDailyData = await DailyStatics.findOneAndUpdate({ date: todayDate }, todayNewData)
-    let isSavedCorrectly = await todayDailyData.save();
+    await todayDailyData.save();
 }
 
 
@@ -212,9 +210,9 @@ createCityDataEveryMidnight = () => {
 createCityDataEveryMidnight()
 
 // const createDailyStatsData = async () => {
-//     // for (let i = 60; i >= 0; i--) {
+//     for (let i = 60; i >= 0; i--) {
 //     const today = new Date();
-//     // today.setDate(today.getDate() - i)
+//     today.setDate(today.getDate() - i)
 //     const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
 //     const newDayStatsData = {
 //         date: todayDate,
@@ -233,17 +231,17 @@ createCityDataEveryMidnight()
 //     }
 //     const newDayStats = new DailyStatics(newDayStatsData)
 //     await newDayStats.save();
-//     // }
+//     }
 // }
 // createDailyStatsData()
 
 // crateCitiesData = async () => {
 //         const cities = ['תל אביב', "ירושלים", "ראשון לציון", "חולון", "אילת", "רחובות", "פרדס חנה", "בנימינה", "כפר סבא", "נהריה"]
 //         const residents = [107938, 129394, 87492, 21423, 9029, 14020, 3029, 3490, 8029, 10203];
-//     for (let i = citiesT.length - 1; i >= 0; i--) {
-//         // for (let j = 6; j > 0; j--) {
+//     for (let i = cities.length - 1; i >= 0; i--) {
+//         for (let j = 7; j >= 0; j--) {
 //             const today = new Date();
-//             // today.setDate(today.getDate() - j)
+//             today.setDate(today.getDate() - j)
 //             const todayDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
 //             const cityData = {
 //                 date: todayDate,
@@ -255,11 +253,10 @@ createCityDataEveryMidnight()
 //                 governmentScore: "orange",
 //                 dailyScore: Math.floor(Math.random() * 8) + 2
 //             }
-//             // console.log(cityData)
 
 //             const newDayCityStats = new CityDailyStats(cityData)
 //             await newDayCityStats.save();
-//         // }
+//         }
 //     }
 // }
 // crateCitiesData()

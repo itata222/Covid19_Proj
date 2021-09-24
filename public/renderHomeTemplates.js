@@ -33,7 +33,6 @@ const getTodayData = async () => {
 getTodayData();
 
 const renderInitial6Boxes = (todayDataFromDB) => {
-    console.log(todayDataFromDB.todayData.personsMidnight)
     const mainBox1Rendered = Mustache.render(mainBox1Template, {
         newVerifiedYesterday: new Intl.NumberFormat().format(todayDataFromDB.yesterdayData.newVerified),
         newVerifiedMidNight: `${todayDataFromDB.todayData.newPatientsMidnight}${todayDataFromDB.todayData.newPatientsMidnight >= 0 ? '+' : '-'}`,
@@ -72,7 +71,6 @@ const renderInitial6Boxes = (todayDataFromDB) => {
     mainBox5Container.insertAdjacentHTML('afterbegin', mainBox5Rendered)
     totalDeathsSymbol.className = "totalDeaths-graph-container";
 
-    // console.log(yesterdayData)
     const mainBox6Rendered = Mustache.render(mainBox6Template, {
         PercentageOfPositiveTestsYesterday: `${String(todayDataFromDB.yesterdayData.newVerified * 100 / todayDataFromDB.yesterdayData.numberOfTests).substr(0, 4)}%`,
         sumTestsYesterday: new Intl.NumberFormat().format(todayDataFromDB.yesterdayData.numberOfTests)

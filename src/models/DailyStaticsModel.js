@@ -63,7 +63,6 @@ const dailyStaticsScheme = new mongoose.Schema(
 dailyStaticsScheme.methods.updateDailyStats = async function () {
     const dailyStats = this;
 
-    console.log(dailyStats)
 
     await dailyStats.save();
     return dailyStats;

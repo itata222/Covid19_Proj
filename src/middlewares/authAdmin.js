@@ -12,7 +12,6 @@ const auth = async (req, res, next) => {
                 data = decoded
             }
         })
-        // console.log(data)
         const admin = await Admin.findOne({
             _id: data._id,
             "tokens.token": token
